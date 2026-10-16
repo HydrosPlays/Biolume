@@ -11,10 +11,10 @@
   <a href="https://github.com/HydrosPlays/Biolume/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/HydrosPlays/Biolume?style=for-the-badge&label=release&labelColor=0a1b30&color=2ee8ff"></a>
   <a href="https://github.com/HydrosPlays/Biolume/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/HydrosPlays/Biolume/total?style=for-the-badge&labelColor=0a1b30&color=1df2c2"></a>
   <img alt="Windows 10 and 11" src="https://img.shields.io/badge/Windows-10%20%7C%2011-2ee8ff?style=for-the-badge&labelColor=0a1b30">
-  <a href="#elgato-stream-deck"><img alt="Stream Deck plugin included" src="https://img.shields.io/badge/Stream%20Deck-plugin%20included-9a6bff?style=for-the-badge&logo=elgato&logoColor=white&labelColor=0a1b30"></a>
 </p>
 
 <p align="center">
+  <a href="#elgato-stream-deck"><img alt="Stream Deck plugin included" src="https://img.shields.io/badge/Stream%20Deck-plugin%20included-9a6bff?style=flat-square&logo=elgato&logoColor=white&labelColor=0a1b30"></a>
   <img alt="17 games, 67 hunting methods" src="https://img.shields.io/badge/odds-17%20games%20%C2%B7%2067%20methods-1df2c2?style=flat-square&labelColor=0a1b30">
   <img alt="Electron 44" src="https://img.shields.io/badge/Electron-44-2ee8ff?style=flat-square&logo=electron&logoColor=white&labelColor=0a1b30">
   <img alt="React 19" src="https://img.shields.io/badge/React-19-2ee8ff?style=flat-square&logo=react&logoColor=white&labelColor=0a1b30">
