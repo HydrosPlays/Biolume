@@ -1,0 +1,109 @@
+/*
+ * Shared motion vocabulary. Slow and organic; transform / opacity only.
+ *
+ * CSS Modules hash keyframe names per file, so these are exposed as global
+ * utility classes instead (`className={cx(styles.card, 'bl-rise-in')}`).
+ * Reduced motion is handled globally in base.css — nothing to do per use.
+ */
+@keyframes bl-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*
+ * Entrances end on `transform: none` so that, once finished, the element is
+ * not a containing block for fixed-position descendants.
+ */
+@keyframes bl-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bl-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bl-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes bl-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes bl-ripple {
+  from {
+    opacity: 0.55;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+}
+
+@keyframes bl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Entrances */
+.bl-fade-in {
+  animation: bl-fade-in var(--duration-base) var(--ease-out) both;
+}
+.bl-rise-in {
+  animation: bl-rise-in var(--duration-slow) var(--ease-out) both;
+}
+.bl-pop-in {
+  animation: bl-pop-in var(--duration-base) var(--ease-out) both;
+}
+
+/* Living light */
+.bl-breathe {
+  animation: bl-breathe var(--duration-breath) var(--ease-in-out) infinite;
+}
+.bl-pulse {
+  animation: bl-pulse var(--duration-pulse) var(--ease-in-out) infinite;
+}
+/* One-shot expanding ring; put it on an absolutely positioned, rounded, bordered element. */
+.bl-ripple {
+  animation: bl-ripple var(--duration-ripple) var(--ease-out) both;
+  pointer-events: none;
+}
+
+/* Stagger helper: set `style={{ '--i': index }}` on children of a list. */
+.bl-stagger {
+  animation-delay: calc(var(--i, 0) * 40ms);
+}

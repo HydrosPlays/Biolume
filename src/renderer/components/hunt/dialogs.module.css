@@ -1,0 +1,243 @@
+/* Dialogs of the hunt feature: phase dialog, new hunt, rename, hunt manager. */
+
+.form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+@media (max-width: 620px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ── Species results ──────────────────────────────────────── */
+
+.speciesOption {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-width: 0;
+}
+
+.speciesText {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+
+.speciesName {
+  overflow: hidden;
+  font-weight: 600;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.speciesMeta {
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--text-subtle);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.speciesTypes {
+  display: inline-flex;
+  flex: none;
+  gap: var(--space-1);
+}
+
+/* The species the dialog currently resolves to (or the free-text fallback). */
+.picked {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 56px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-md);
+}
+
+.picked[data-matched] {
+  border-color: var(--border-violet);
+  background: var(--accent-3-soft);
+}
+
+.picked[data-variant='target'][data-matched] {
+  border-color: var(--border-shiny);
+  background: var(--shiny-soft);
+}
+
+.pickedText {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+
+.pickedName {
+  overflow: hidden;
+  font-weight: 600;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pickedMeta {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.pickedTypes {
+  display: inline-flex;
+  flex: none;
+  gap: var(--space-1);
+}
+
+/* ── Read-out of what is being recorded ───────────────────── */
+
+.readout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.readoutItem {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-md);
+}
+
+.readoutItem dt {
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.readoutItem dd {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note {
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+}
+
+.note[data-tone='warn'] {
+  color: var(--tone-text);
+}
+
+.oddsPreview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.oddsValue {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--glow-aqua);
+}
+
+/* ── Hunt manager ─────────────────────────────────────────── */
+
+.groups {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.groupTitle {
+  margin-bottom: var(--space-2);
+}
+
+.huntList {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.huntRow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-glass);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-fast) ease;
+}
+
+.huntRow:hover,
+.huntRow:focus-within {
+  border-color: var(--border-strong);
+}
+
+.huntRow[data-current] {
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-xs);
+}
+
+.huntRowText {
+  display: grid;
+  min-width: 0;
+}
+
+.huntRowName {
+  overflow: hidden;
+  font-weight: 600;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.huntRowMeta {
+  overflow: hidden;
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.huntRowActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}

@@ -1,0 +1,472 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--surface-1);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-lg);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-3);
+}
+
+.title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.title > svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Mirrors the note style of the encounter analysis it sits in. */
+.note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--tone-soft);
+  border: 1px solid var(--tone-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--text);
+}
+
+.note > svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  color: var(--tone);
+}
+
+.note strong {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+/* ── Filters ─────────────────────────────────────────────── */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+}
+
+.count {
+  margin-left: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+/* ── Location cards ──────────────────────────────────────── */
+
+.areas,
+.fixed {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  align-items: start;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Cards that list several encounters need the room. */
+.areas:has(> [data-detailed]) {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 272px), 1fr));
+}
+
+.fixed {
+  grid-template-columns: minmax(0, 1fr);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-faint);
+}
+
+.fixed[data-alone] {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.area {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+  min-width: 0;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-2);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-md);
+}
+
+.area[data-detailed] {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-1);
+}
+
+.area[data-fixed] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.area[data-locked] {
+  border-color: var(--danger-soft);
+}
+
+.place {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+  min-width: 0;
+  font-size: var(--text-sm);
+  color: var(--text);
+}
+
+.placeName {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.area[data-detailed] .placeName {
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.where {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+}
+
+.where > svg {
+  flex: none;
+  width: 12px;
+  height: 12px;
+}
+
+.levels {
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-1);
+}
+
+/* ── Encounter lines inside a card ───────────────────────── */
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* What and how on the left (wrapping as needed), the level pill pinned to the right. */
+.line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--space-1) var(--space-2);
+  padding: 5px 0;
+  border-top: 1px solid var(--border-faint);
+}
+
+.line:first-child {
+  border-top: 0;
+}
+
+.lineMain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) 6px;
+  min-width: 0;
+  min-height: 22px;
+}
+
+.kind {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.kind > svg {
+  width: 13px;
+  height: 13px;
+  color: var(--accent);
+}
+
+.kind[data-kind='surf'] > svg,
+.kind[data-kind='fishing'] > svg {
+  color: var(--glow-blue);
+}
+
+.kind[data-kind='alpha'] > svg {
+  color: var(--warn);
+}
+
+.kind[data-kind='outbreak'] > svg,
+.kind[data-kind='special'] > svg {
+  color: var(--accent-3);
+}
+
+.kind[data-kind='raid'] > svg,
+.kind[data-kind='den'] > svg {
+  color: var(--electric);
+}
+
+.method {
+  min-width: 0;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.condition,
+.version {
+  display: inline-flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 18px;
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: var(--text-2xs);
+  line-height: 1.2;
+}
+
+.condition {
+  background: var(--surface-3);
+  color: var(--text-muted);
+}
+
+/* Needs the DLC / expansion: violet, the colour of rare things. */
+.condition[data-expansion] {
+  background: var(--accent-3-soft);
+  border-color: var(--border-violet);
+  color: var(--text);
+}
+
+.condition > svg {
+  flex: none;
+  width: 11px;
+  height: 11px;
+  color: var(--text-subtle);
+}
+
+/* Version exclusives, each in its box-art colour. */
+.version {
+  --version-color: var(--ink-300);
+  background: color-mix(in srgb, var(--version-color) 13%, transparent);
+  border-color: color-mix(in srgb, var(--version-color) 48%, transparent);
+  color: var(--version-color);
+  font-weight: 600;
+}
+
+.version:is(
+  [data-version='gold'],
+  [data-version='heartgold'],
+  [data-version='lets-go-pikachu'],
+  [data-version='ultra-sun']
+) {
+  --version-color: var(--shiny-gold);
+}
+
+.version:is([data-version='silver'], [data-version='soulsilver'], [data-version='platinum']) {
+  --version-color: var(--type-steel);
+}
+
+.version[data-version='crystal'] {
+  --version-color: var(--type-ice);
+}
+
+.version:is(
+  [data-version='ruby'],
+  [data-version='omega-ruby'],
+  [data-version='y'],
+  [data-version='shield'],
+  [data-version='red']
+) {
+  --version-color: var(--danger);
+}
+
+.version:is(
+  [data-version='sapphire'],
+  [data-version='alpha-sapphire'],
+  [data-version='x'],
+  [data-version='sword'],
+  [data-version='diamond'],
+  [data-version='brilliant-diamond'],
+  [data-version='blue']
+) {
+  --version-color: var(--type-water);
+}
+
+.version:is([data-version='emerald'], [data-version='leafgreen']) {
+  --version-color: var(--type-grass);
+}
+
+.version:is([data-version='firered'], [data-version='sun']) {
+  --version-color: var(--type-fire);
+}
+
+.version:is([data-version='pearl'], [data-version='shining-pearl']) {
+  --version-color: var(--type-fairy);
+}
+
+.version:is([data-version='black'], [data-version='black-2']) {
+  --version-color: var(--type-dark);
+}
+
+.version:is([data-version='white'], [data-version='white-2']) {
+  --version-color: var(--ink-100);
+}
+
+.version:is([data-version='moon'], [data-version='violet']) {
+  --version-color: var(--glow-violet);
+}
+
+.version[data-version='ultra-moon'] {
+  --version-color: var(--type-psychic);
+}
+
+.version[data-version='scarlet'] {
+  --version-color: var(--type-fighting);
+}
+
+.version:is([data-version='lets-go-eevee'], [data-version='yellow']) {
+  --version-color: var(--type-ground);
+}
+
+.rate {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-subtle);
+}
+
+/* ── Level pills ─────────────────────────────────────────── */
+
+.level {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px var(--space-2);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.level > svg {
+  width: 12px;
+  height: 12px;
+}
+
+.level:hover {
+  border-color: var(--border-glow);
+  color: var(--text-strong);
+  box-shadow: var(--glow-xs);
+}
+
+.level[data-alpha] {
+  border-color: var(--warn-soft);
+  color: var(--warn);
+}
+
+.level[data-current] {
+  background: var(--accent-soft);
+  border-color: var(--border-glow);
+  color: var(--accent);
+}
+
+.more,
+.inline {
+  align-self: flex-start;
+  padding: 0;
+  background: none;
+  border: 0;
+  font-size: var(--text-sm);
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 3px;
+}
+
+.more:hover,
+.inline:hover {
+  color: var(--glow-aqua);
+}
+
+/* ── Loading / empty ─────────────────────────────────────── */
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.skeletonFacts {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: var(--space-2);
+}
+
+.empty {
+  padding-block: var(--space-4);
+}
+
+.source {
+  font-size: var(--text-2xs);
+  color: var(--text-subtle);
+}

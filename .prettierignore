@@ -1,0 +1,12 @@
+node_modules
+out
+dist
+release
+coverage
+.smoke
+package-lock.json
+src/renderer/data/*.json
+# Stream Deck plugin: bundler output, debug logs and the packed installer
+streamdeck/*.sdPlugin/bin
+streamdeck/*.sdPlugin/logs
+build/streamdeck

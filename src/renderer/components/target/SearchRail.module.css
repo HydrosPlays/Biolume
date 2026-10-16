@@ -1,0 +1,197 @@
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  min-height: 0;
+  padding: var(--space-3);
+  background: var(--gradient-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--inset-highlight), var(--shadow-md);
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 20px;
+  padding-inline: 2px;
+  font-size: var(--text-2xs);
+  color: var(--text-subtle);
+}
+
+.keys {
+  display: inline-flex;
+  flex: none;
+  gap: 3px;
+  opacity: 0.8;
+}
+
+/* The list is the rail's one flexible region; everything else keeps its height. */
+.resultsFrame {
+  min-height: 96px;
+  margin-inline: calc(var(--space-1) * -1);
+}
+
+.results {
+  padding-inline: var(--space-1);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 5px var(--space-2) 5px 6px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-base) ease;
+}
+
+.option:hover {
+  background: var(--surface-hover);
+}
+
+/* Keyboard highlight: the cyan light follows the arrow keys. */
+.option[data-active] {
+  background: var(--surface-active);
+  border-color: var(--border-strong);
+}
+
+.rail:focus-within .option[data-active] {
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-xs);
+}
+
+/* The species currently in the analyzer: a lit edge that stays put. */
+.option[data-current]::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-2);
+  box-shadow: var(--glow-teal-sm);
+}
+
+.option[data-form] .optionSprite {
+  margin-left: var(--space-2);
+}
+
+.optionSprite {
+  flex: none;
+}
+
+.optionBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.optionTop,
+.optionBottom {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.optionTop {
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.optionName {
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 500;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.optionDex {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-subtle);
+}
+
+.optionGen {
+  flex: none;
+  margin-left: 2px;
+  font-size: var(--text-2xs);
+  color: var(--text-subtle);
+  white-space: nowrap;
+}
+
+.optionTarget {
+  margin-left: auto;
+}
+
+.more {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--space-2);
+}
+
+.recents {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border-faint);
+}
+
+.recentsHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--control-sm);
+}
+
+.recentChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  max-height: 52px;
+  overflow-y: auto;
+}
+
+/* Short windows: one row of chips that scrolls sideways, so the result list keeps its height. */
+@media (max-height: 680px) {
+  .recentChips {
+    flex-wrap: nowrap;
+    max-height: none;
+    overflow: auto hidden;
+    scrollbar-width: none;
+  }
+}

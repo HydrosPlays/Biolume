@@ -1,0 +1,17 @@
+node_modules/
+out/
+dist/
+release/
+coverage/
+.smoke/
+*.log
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+.env
+.env.*
+.vscode/*
+!.vscode/extensions.json
+
+# Packed Stream Deck plugin installer (npm run streamdeck:pack / npm run dist rebuild it)
+build/streamdeck/

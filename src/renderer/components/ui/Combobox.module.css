@@ -1,0 +1,81 @@
+@layer kit {
+  .searchIcon {
+    width: 15px;
+    height: 15px;
+  }
+
+  .trailing {
+    min-width: 26px;
+    justify-content: center;
+  }
+
+  .clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 50%;
+    color: var(--text-subtle);
+    transition:
+      background-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
+  }
+
+  .clear:hover {
+    background: var(--surface-hover);
+    color: var(--text-strong);
+  }
+
+  .clear > svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  /* Results popover: Select's popup shell with fixed header / footer rows. */
+  /* Doubled selectors: same layer as Select's popup rules, so specificity has to decide. */
+  .popover.popover {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .results {
+    flex: 1;
+    min-height: 0;
+    padding: var(--space-1);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .results:empty {
+    display: none;
+  }
+
+  .item.item {
+    min-height: 40px;
+  }
+
+  .header,
+  .footer {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-xs);
+    color: var(--text-subtle);
+  }
+
+  .header {
+    border-bottom: 1px solid var(--border-faint);
+  }
+
+  .footer {
+    border-top: 1px solid var(--border-faint);
+    background: var(--surface-sunken);
+  }
+}

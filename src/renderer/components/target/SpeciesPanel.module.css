@@ -1,0 +1,331 @@
+/* ── Hero ───────────────────────────────────────────────── */
+
+/* The section is the query container; the inner row is what reflows. */
+.hero {
+  container: hero / inline-size;
+  position: relative;
+  min-width: 0;
+  padding: var(--space-4);
+  background: var(--gradient-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--inset-highlight), var(--shadow-md);
+}
+
+.heroInner {
+  display: flex;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.sprites {
+  display: flex;
+  flex: none;
+  gap: var(--space-3);
+}
+
+.spriteCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  padding: var(--space-2) var(--space-2) 6px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-md);
+  transition:
+    border-color var(--duration-base) ease,
+    box-shadow var(--duration-slow) ease;
+}
+
+.spriteCard figcaption {
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+/* Gold belongs to the shiny, and only to the shiny. */
+.spriteCard[data-shiny] {
+  border-color: var(--border-shiny);
+  background:
+    radial-gradient(circle at 50% 38%, var(--shiny-soft), transparent 70%), var(--surface-sunken);
+}
+
+.spriteCard[data-shiny] figcaption {
+  color: var(--shiny);
+}
+
+.hero:hover .spriteCard[data-shiny] {
+  box-shadow: var(--glow-shiny-sm);
+}
+
+.identity {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.dex {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--glow-aqua);
+}
+
+.name {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.01em;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tags,
+.forms {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+/* A badge that carries a tooltip is focusable, so it needs the ring too. */
+.focusable {
+  cursor: help;
+}
+
+.focusable:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.heroFoot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-1);
+}
+
+.links {
+  display: inline-flex;
+  gap: 2px;
+}
+
+@container hero (max-width: 540px) {
+  .heroInner {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .sprites {
+    justify-content: center;
+  }
+
+  .name {
+    font-size: var(--text-xl);
+  }
+}
+
+/* ── Facts ──────────────────────────────────────────────── */
+
+.facts {
+  container: facts / inline-size;
+}
+
+.factsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4) var(--space-6);
+}
+
+@container facts (min-width: 560px) {
+  .factsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stats {
+    grid-row: span 2;
+  }
+
+  .dexEntry {
+    grid-column: 1 / -1;
+  }
+}
+
+.sectionTitle {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.missing {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--text-disabled);
+}
+
+.statList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: var(--space-2) 0 0;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border-faint);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.totalValue {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-strong);
+}
+
+.abilities {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-md);
+}
+
+.abilities li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: var(--text-sm);
+}
+
+.block[data-emphasis] {
+  padding: var(--space-2) var(--space-3);
+  background: var(--accent-soft);
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-md);
+}
+
+.factLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0;
+}
+
+.factLabel {
+  min-width: 84px;
+  color: var(--text-subtle);
+}
+
+.factValue {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-strong);
+}
+
+.factUnit {
+  margin-right: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--text-subtle);
+}
+
+.hint {
+  margin: 0;
+  line-height: var(--leading-normal);
+  color: var(--text-muted);
+}
+
+.chances {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px var(--space-4);
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+}
+
+.chances strong {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--text);
+}
+
+.gender {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Male share in blue, the remainder (female) in pink — the games' own convention. */
+.genderBar {
+  flex: none;
+  width: 72px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    90deg,
+    var(--type-water) 0 var(--male),
+    var(--type-fairy) var(--male) 100%
+  );
+}
+
+.flavor {
+  margin: 0;
+  max-width: 68ch;
+  font-size: var(--text-md);
+  font-style: italic;
+  line-height: var(--leading-normal);
+  color: var(--text);
+}
+
+.dexMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px var(--space-3);
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+}

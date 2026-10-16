@@ -1,0 +1,20 @@
+@layer kit {
+  .spinner {
+    display: inline-flex;
+    flex: none;
+    /* Hosts (Button, IconButton) set --spinner-color to match their own text. */
+    color: var(--spinner-color, var(--accent));
+  }
+
+  .svg {
+    width: 100%;
+    height: 100%;
+    animation: spin 0.9s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}

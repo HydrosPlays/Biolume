@@ -1,0 +1,204 @@
+/*
+ * The layer starts below the title bar in the main window (--modal-top, set in
+ * base.css) so the window can still be moved, minimised and closed while a
+ * dialog is open.
+ */
+@layer kit {
+  .layer {
+    position: fixed;
+    inset: var(--modal-top, 0px) 0 0 0;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+    -webkit-app-region: no-drag;
+    animation: fade var(--duration-base) ease both;
+  }
+
+  /*
+ * The blur lives on its own element: a backdrop-filter (like a transform) on
+ * the layer would become the containing block of the fixed-position popovers
+ * portalled into it and throw off their coordinates.
+ */
+  .scrim {
+    position: absolute;
+    inset: 0;
+    background: var(--scrim);
+    backdrop-filter: blur(6px);
+    pointer-events: none;
+  }
+
+  .dialog {
+    --dialog-hairline: var(--hairline-cyan);
+    --dialog-light: var(--glow-aqua);
+    --dialog-light-soft: var(--accent-soft);
+    --dialog-light-border: rgb(46 232 255 / 0.3);
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 540px;
+    max-height: 100%;
+    background: linear-gradient(180deg, rgb(13 35 61 / 0.97) 0%, rgb(5 14 28 / 0.98) 100%);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-xl);
+    box-shadow:
+      var(--shadow-lg),
+      var(--inset-highlight),
+      0 0 60px rgb(46 232 255 / 0.07);
+    outline: none;
+    /* opacity-only entrance: a transform here would re-anchor fixed-position popovers inside. */
+    animation: fade var(--duration-slow) var(--ease-out) both;
+  }
+
+  .dialog::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 14%;
+    right: 14%;
+    height: 1px;
+    background: var(--dialog-hairline);
+    pointer-events: none;
+  }
+
+  .dialog[data-tone='rare'] {
+    --dialog-hairline: var(--hairline-violet);
+    --dialog-light: #c8b2ff;
+    --dialog-light-soft: var(--accent-3-soft);
+    --dialog-light-border: rgb(154 107 255 / 0.4);
+  }
+
+  .dialog[data-tone='shiny'] {
+    --dialog-hairline: var(--hairline-shiny);
+    --dialog-light: #ffe69a;
+    --dialog-light-soft: var(--shiny-soft);
+    --dialog-light-border: rgb(255 216 102 / 0.4);
+  }
+
+  .dialog[data-tone='danger'] {
+    --dialog-hairline: var(--hairline-danger);
+    --dialog-light: #ff93a9;
+    --dialog-light-soft: var(--danger-soft);
+    --dialog-light-border: rgb(255 79 115 / 0.4);
+  }
+
+  .sm {
+    max-width: 400px;
+  }
+
+  .lg {
+    max-width: 760px;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .header {
+    display: flex;
+    flex: none;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-5) var(--space-3) var(--space-6);
+  }
+
+  .icon {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--dialog-light-soft);
+    border: 1px solid var(--dialog-light-border);
+    border-radius: var(--radius-md);
+    color: var(--dialog-light);
+  }
+
+  .icon > svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .titles {
+    flex: 1;
+    min-width: 0;
+    padding-top: 2px;
+  }
+
+  .title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+  }
+
+  .description {
+    margin-top: var(--space-1);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .close {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    color: var(--text-subtle);
+    transition:
+      background-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
+  }
+
+  .close:hover {
+    background: var(--surface-hover);
+    color: var(--text-strong);
+  }
+
+  .close:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .close > svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .body {
+    flex: 1;
+    min-height: 0;
+    padding: var(--space-2) var(--space-6) var(--space-5);
+    overflow-y: auto;
+  }
+
+  .footer {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-6);
+    border-top: 1px solid var(--border-faint);
+    background: var(--surface-sunken);
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,178 @@
+/* ── Switch ────────────────────────────────────────────── */
+@layer kit {
+  .switch {
+    --track-width: 38px;
+    --track-height: 22px;
+    --thumb-size: 16px;
+
+    position: relative;
+    flex: none;
+    width: var(--track-width);
+    height: var(--track-height);
+    padding: 0;
+    background: var(--surface-control);
+    border: 1px solid var(--border-control);
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.45);
+    transition:
+      background-color var(--duration-base) ease,
+      border-color var(--duration-base) ease,
+      box-shadow var(--duration-base) ease;
+  }
+
+  .switch.sm {
+    --track-width: 30px;
+    --track-height: 18px;
+    --thumb-size: 12px;
+  }
+
+  .thumb {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    margin-top: calc(var(--thumb-size) / -2);
+    border-radius: 50%;
+    background: var(--ink-400);
+    transition:
+      transform var(--duration-base) var(--ease-spring),
+      background-color var(--duration-base) ease,
+      box-shadow var(--duration-base) ease;
+  }
+
+  .switch:hover:not(:disabled) {
+    border-color: var(--border-control-hover);
+  }
+
+  .switch[aria-checked='true'] {
+    background: rgb(46 232 255 / 0.2);
+    border-color: rgb(46 232 255 / 0.55);
+    box-shadow:
+      inset 0 1px 3px rgb(0 0 0 / 0.3),
+      var(--glow-xs);
+  }
+
+  .switch[aria-checked='true'] .thumb {
+    transform: translateX(calc(var(--track-width) - var(--thumb-size) - 6px));
+    background: var(--glow-aqua);
+    box-shadow: 0 0 10px rgb(46 232 255 / 0.75);
+  }
+
+  .switch:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .switch:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  /* ── Labelled rows (switch + checkbox) ─────────────────── */
+  .row,
+  .checkRow {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .row[data-disabled],
+  .checkRow[data-disabled] {
+    opacity: 0.55;
+  }
+
+  .trailing {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    padding-top: 1px;
+  }
+
+  .label {
+    font-size: var(--text-md);
+    color: var(--text);
+  }
+
+  .description {
+    font-size: var(--text-xs);
+    line-height: 1.45;
+    color: var(--text-subtle);
+  }
+
+  /* ── Checkbox ──────────────────────────────────────────── */
+  .checkWrap {
+    position: relative;
+    display: inline-flex;
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+  }
+
+  .checkInput {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+  }
+
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: var(--surface-control);
+    border: 1px solid var(--border-control-hover);
+    border-radius: var(--radius-xs);
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.4);
+    color: var(--text-on-accent);
+    pointer-events: none;
+    transition:
+      background-color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease,
+      box-shadow var(--duration-base) ease;
+  }
+
+  .box > svg {
+    width: 13px;
+    height: 13px;
+    stroke-width: 3;
+    opacity: 0;
+    transform: scale(0.6);
+    transition:
+      opacity var(--duration-fast) ease,
+      transform var(--duration-base) var(--ease-spring);
+  }
+
+  .checkRow:hover .checkInput:not(:disabled) + .box {
+    border-color: var(--border-glow);
+  }
+
+  .checkInput:checked + .box,
+  .box[data-indeterminate] {
+    background: var(--accent);
+    border-color: var(--glow-aqua);
+    box-shadow: var(--glow-xs);
+  }
+
+  .checkInput:checked + .box > svg,
+  .box[data-indeterminate] > svg {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .checkInput:focus-visible + .box {
+    box-shadow: var(--focus-ring);
+  }
+}

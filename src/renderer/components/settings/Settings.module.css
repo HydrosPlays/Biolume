@@ -1,0 +1,643 @@
+/* ── Page layout ─────────────────────────────────────────────────────── */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: start;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-10);
+}
+
+/*
+ * Two columns once both still hold a full settings row. The hotkey table, the
+ * Stream Deck section and the data section span; audio and general stack
+ * beside the taller overlay panel, so the page order (and the tab order) stays
+ * the same as in one column.
+ */
+@media (min-width: 1180px) {
+  .layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hotkeys,
+  .streamdeck,
+  .data {
+    grid-column: 1 / -1;
+  }
+
+  .audio,
+  .general {
+    grid-column: 1;
+  }
+
+  .overlay {
+    grid-column: 2;
+    grid-row: 3 / span 2;
+  }
+}
+
+.section {
+  /* Jump links scroll the section under the page header, not flush against it. */
+  scroll-margin-top: var(--space-3);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding-bottom: var(--space-3);
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--control-sm);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  transition:
+    border-color var(--duration-fast) ease,
+    color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease,
+    box-shadow var(--duration-base) ease;
+}
+
+.navLink:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-hover);
+  color: var(--text-strong);
+}
+
+.navLink:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.navLink svg {
+  color: var(--glow-aqua);
+}
+
+/* ── Rows ────────────────────────────────────────────────────────────── */
+
+.rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.rows > * {
+  padding-block: var(--space-3);
+}
+
+.rows > * + * {
+  border-top: 1px solid var(--border-faint);
+}
+
+.rows > :first-child {
+  padding-top: 0;
+}
+
+.rows > :last-child {
+  padding-bottom: 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.row[data-align='start'] {
+  align-items: flex-start;
+}
+
+.rowText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.rowLabel {
+  color: var(--text);
+  font-size: var(--text-md);
+}
+
+.rowDescription {
+  color: var(--text-subtle);
+  font-size: var(--text-xs);
+  line-height: 1.45;
+}
+
+.rowControl {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.slider {
+  width: 232px;
+}
+
+/* A row whose control needs the full width (segmented controls with a second line). */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* ── Notes (warnings, errors, explanations) ──────────────────────────── */
+
+.note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--tone-text, var(--text-muted));
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+
+.note > svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--tone, currentColor);
+}
+
+.note strong {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+.note[data-tone='neutral'] {
+  color: var(--text-muted);
+}
+
+.caveat {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--tone-border, var(--border));
+  border-radius: var(--radius-md);
+  background: var(--tone-soft, transparent);
+}
+
+/* ── Hotkeys ─────────────────────────────────────────────────────────── */
+
+.mode {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--tone-border, var(--border));
+  border-radius: var(--radius-md);
+  background: var(--tone-soft, transparent);
+}
+
+.modeText {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.modeText strong {
+  color: var(--tone-text, var(--text-strong));
+  font-weight: 600;
+}
+
+.actionList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.actionRow {
+  display: grid;
+  /* The bindings take what they need; the label keeps the rest (and at least 150 px). */
+  grid-template-columns: minmax(150px, 1fr) minmax(0, auto);
+  gap: var(--space-2) var(--space-5);
+  align-items: center;
+  padding-block: var(--space-3);
+}
+
+.actionRow + .actionRow {
+  border-top: 1px solid var(--border-faint);
+}
+
+.actionLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  color: var(--text);
+  font-size: var(--text-md);
+}
+
+.actionHint {
+  color: var(--text-subtle);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+}
+
+.bindings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.unbound {
+  color: var(--text-disabled);
+  font-size: var(--text-sm);
+  font-style: italic;
+}
+
+.binding {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--control-sm);
+  padding: 0 3px 0 var(--space-2);
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-pill);
+  background: var(--surface-control);
+  transition:
+    border-color var(--duration-base) ease,
+    box-shadow var(--duration-base) ease;
+}
+
+.binding:hover,
+.binding:focus-within {
+  border-color: var(--border-strong);
+}
+
+.binding[data-health='failed'] {
+  border-color: var(--border-danger);
+}
+
+.health {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-subtle);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--ink-500);
+}
+
+.binding[data-health='registered'] .dot {
+  background: var(--ok);
+  box-shadow: var(--glow-teal-sm);
+}
+
+.binding[data-health='ready'] .dot {
+  background: var(--glow-cyan);
+}
+
+.binding[data-health='failed'] .dot {
+  background: var(--danger);
+  box-shadow: var(--glow-danger-sm);
+}
+
+.binding[data-health='failed'] .health {
+  color: var(--danger);
+}
+
+.remove {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-subtle);
+  transition:
+    background-color var(--duration-fast) ease,
+    color var(--duration-fast) ease;
+}
+
+.remove:hover {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.remove:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring-danger);
+  color: var(--danger);
+}
+
+.recorder {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-sm);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-violet);
+  border-radius: var(--radius-pill);
+  background: var(--accent-3-soft);
+  box-shadow: var(--glow-violet-sm);
+  color: var(--text-strong);
+  font-size: var(--text-sm);
+  outline: none;
+}
+
+.recorder:focus-visible {
+  box-shadow:
+    var(--glow-violet-sm),
+    0 0 0 2px color-mix(in srgb, var(--glow-violet) 55%, transparent);
+}
+
+.recDot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: var(--neon-magenta);
+  animation: settings-rec var(--duration-pulse) var(--ease-in-out) infinite;
+}
+
+.recHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-subtle);
+  font-size: var(--text-2xs);
+}
+
+.rowNotes {
+  display: flex;
+  grid-column: 1 / -1;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.hotkeyFooter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.presetsLabel {
+  color: var(--text-subtle);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+/* ── Stream Deck ─────────────────────────────────────────────────────── */
+
+.deckIntro {
+  max-width: 78ch;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+/* The plugin and the no-plugin route side by side when there is room, stacked otherwise. */
+.deckWrap {
+  container: deck / inline-size;
+}
+
+.deckColumns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.deckBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.deckColumns > .deckBlock + .deckBlock {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-faint);
+}
+
+@container deck (min-width: 680px) {
+  .deckColumns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+
+  .deckColumns > .deckBlock + .deckBlock {
+    padding-top: 0;
+    padding-left: var(--space-5);
+    border-top: 0;
+    border-left: 1px solid var(--border-faint);
+  }
+}
+
+.deckBlockHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--glow-aqua);
+}
+
+.deckHeading {
+  margin-bottom: var(--space-2);
+  color: var(--text-strong);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.deckBlockHead .deckHeading {
+  margin-bottom: 0;
+}
+
+.deckText {
+  color: var(--text-subtle);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+
+.deckKeys {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: var(--space-1) var(--space-3);
+  margin: 0 0 var(--space-2);
+  padding: 0;
+  list-style: none;
+}
+
+.deckKey {
+  display: contents;
+}
+
+.deckKeyName {
+  color: var(--text);
+  font-size: var(--text-sm);
+  font-weight: 560;
+}
+
+.deckKeyText {
+  color: var(--text-subtle);
+  font-size: var(--text-xs);
+  line-height: 1.6;
+}
+
+.deckPreset {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.deckPresetRow {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  gap: var(--space-3);
+  align-items: center;
+  padding-block: var(--space-2);
+}
+
+.deckPresetRow + .deckPresetRow {
+  border-top: 1px solid var(--border-faint);
+}
+
+.deckPresetAction {
+  overflow: hidden;
+  color: var(--text);
+  font-size: var(--text-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.deckSteps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding-left: var(--space-5);
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  line-height: 1.55;
+}
+
+.deckSteps strong {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+/* ── Audio ───────────────────────────────────────────────────────────── */
+
+.packGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2px;
+}
+
+.packGrid > * {
+  justify-self: center;
+}
+
+/* ── Data & About ────────────────────────────────────────────────────── */
+
+.path {
+  display: block;
+  overflow: hidden;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: text;
+}
+
+.versions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.version {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+}
+
+.version dt {
+  color: var(--text-subtle);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.version dd {
+  overflow: hidden;
+  margin: 0;
+  color: var(--text-strong);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.legal {
+  color: var(--text-subtle);
+  font-size: var(--text-xs);
+  line-height: 1.55;
+}
+
+/* ── Narrow windows (940 px wide: about 650 px of content) ───────────── */
+
+@media (max-width: 1040px) {
+  .slider {
+    width: 190px;
+  }
+}
+
+@keyframes settings-rec {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}

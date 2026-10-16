@@ -1,0 +1,6 @@
+# Dependencies (npm ci restores them; streamdeck/scripts/pack.mjs does it when missing)
+node_modules/
+
+# Bundler output (npm run streamdeck:build) and Stream Deck debug logs
+*.sdPlugin/bin/
+*.sdPlugin/logs/

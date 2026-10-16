@@ -1,0 +1,337 @@
+/*
+ * Mini-overlay: a slab of dark glass with a luminous edge that has to read on
+ * top of any game. The window is transparent, so there is nothing to blur —
+ * legibility comes from the card's own darkness (its alpha is the user's
+ * "opacity" setting; text and light stay at full strength) and from an ink
+ * shadow under every glyph.
+ */
+
+/*
+ * Sized by its content and pinned to the window's corner, never by the window:
+ * the window is fitted around this box (see useOverlayAutosize).
+ */
+.frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: max-content;
+}
+
+/* The CSS zoom of `settings.overlay.scale` is set inline; the padding leaves room for the bloom. */
+.scaler {
+  padding: 5px;
+}
+
+.card {
+  --overlay-alpha: 82%;
+  --light: var(--glow-cyan);
+  --light-soft: var(--glow-aqua);
+  --edge: var(--border-strong);
+  --hairline: var(--hairline-cyan);
+  --ink-shadow:
+    0 1px 2px color-mix(in srgb, var(--abyss-950) 95%, transparent),
+    0 0 9px color-mix(in srgb, var(--abyss-950) 75%, transparent);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 310px;
+  padding: 9px 10px 10px 12px;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    158deg,
+    color-mix(in srgb, var(--abyss-700) var(--overlay-alpha), transparent) 0%,
+    color-mix(in srgb, var(--abyss-900) var(--overlay-alpha), transparent) 46%,
+    color-mix(in srgb, var(--abyss-950) var(--overlay-alpha), transparent) 100%
+  );
+  box-shadow:
+    0 0 5px color-mix(in srgb, var(--light) 30%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--light-soft) 14%, transparent),
+    inset 0 0 22px color-mix(in srgb, var(--light) 6%, transparent);
+  color: var(--text);
+  text-shadow: var(--ink-shadow);
+  /* The whole card moves the window; controls opt out below. */
+  -webkit-app-region: drag;
+}
+
+/* The light along the top edge. */
+.card::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: var(--hairline);
+  pointer-events: none;
+}
+
+.card[data-state='completed'] {
+  --light: var(--shiny-gold);
+  --light-soft: var(--shiny-gold);
+  --edge: var(--border-shiny);
+  --hairline: var(--hairline-shiny);
+}
+
+.card[data-state='archived'],
+.card[data-state='empty'] {
+  --edge: var(--border);
+}
+
+.sprite {
+  flex: none;
+  filter: drop-shadow(0 2px 4px color-mix(in srgb, var(--abyss-950) 85%, transparent));
+}
+
+.orb {
+  display: grid;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--light) 8%, transparent);
+  color: var(--light-soft);
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 22px;
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ink-200);
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.card[data-state='empty'] .name {
+  color: var(--text-strong);
+}
+
+.countRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.countBox {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 0;
+  height: 34px;
+  font-size: 2rem;
+}
+
+.countBox[data-size='md'] {
+  font-size: 1.5rem;
+}
+
+.countBox[data-size='sm'] {
+  font-size: 1.25rem;
+}
+
+.count {
+  position: relative;
+  display: inline-block;
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: inherit;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-shadow:
+    var(--ink-shadow),
+    0 0 14px color-mix(in srgb, var(--light) 38%, transparent);
+  transform-origin: left center;
+  animation: overlay-tick 460ms var(--ease-out);
+}
+
+/* A blurred twin of the number that flashes and fades: the pulse's light. */
+.count::after {
+  content: attr(data-value);
+  position: absolute;
+  inset: 0;
+  color: var(--light);
+  filter: blur(7px);
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: none;
+  animation: overlay-bloom 900ms var(--ease-out);
+}
+
+.count[data-direction='down'] {
+  animation-name: overlay-tick-down;
+}
+
+.card[data-state='completed'] .count {
+  color: var(--shiny-gold);
+}
+
+.card[data-state='archived'] .count {
+  color: var(--ink-200);
+}
+
+.steppers {
+  display: flex;
+  flex: none;
+  gap: 4px;
+}
+
+.button {
+  display: grid;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--abyss-950) 62%, transparent);
+  color: var(--ink-100);
+  transition:
+    border-color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease,
+    color var(--duration-fast) ease,
+    box-shadow var(--duration-base) ease,
+    transform var(--duration-fast) var(--ease-out);
+  -webkit-app-region: no-drag;
+}
+
+.button[data-variant='primary'] {
+  border-color: color-mix(in srgb, var(--light) 46%, transparent);
+  background: color-mix(in srgb, var(--light) 16%, var(--abyss-950));
+  color: var(--light-soft);
+}
+
+.button[data-variant='ghost'] {
+  width: 22px;
+  height: 22px;
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink-300);
+}
+
+.button:hover:not(:disabled) {
+  border-color: var(--border-glow);
+  background: color-mix(in srgb, var(--light) 20%, var(--abyss-950));
+  box-shadow: var(--glow-xs);
+  color: var(--text-strong);
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.button:disabled {
+  opacity: 0.38;
+}
+
+/* Clicks fall through to the game: the controls are out of reach, and look it. */
+.card[data-locked] .button {
+  opacity: 0.32;
+}
+
+.line,
+.status,
+.lock {
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.line {
+  color: var(--ink-200);
+}
+
+.card[data-state='empty'] .line {
+  font-family: var(--font-body);
+  white-space: normal;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--light-soft);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.card[data-state='archived'] .status {
+  color: var(--ink-300);
+}
+
+.lock {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 1px;
+  color: var(--ink-300);
+}
+
+.lock > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@keyframes overlay-tick {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes overlay-tick-down {
+  from {
+    transform: scale(0.93);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes overlay-bloom {
+  from {
+    opacity: 0.95;
+  }
+  to {
+    opacity: 0;
+  }
+}

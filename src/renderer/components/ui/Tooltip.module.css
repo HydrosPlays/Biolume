@@ -1,0 +1,38 @@
+@layer kit {
+  .tooltip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-tooltip);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 6px 10px;
+    background: var(--surface-popover);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md), var(--glow-xs);
+    color: var(--text);
+    font-size: var(--text-xs);
+    line-height: 1.45;
+    pointer-events: none;
+    -webkit-app-region: no-drag;
+    animation: appear var(--duration-fast) var(--ease-out) both;
+  }
+
+  .content {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

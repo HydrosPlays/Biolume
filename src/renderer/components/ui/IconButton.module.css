@@ -1,0 +1,112 @@
+@layer kit {
+  .button {
+    position: relative;
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: var(--control-md);
+    height: var(--control-md);
+    padding: 0;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+    --spinner-color: currentColor;
+    transition:
+      background-color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease,
+      color var(--duration-fast) ease,
+      box-shadow var(--duration-base) ease,
+      transform var(--duration-fast) var(--ease-out);
+  }
+
+  .button > svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .button:hover:not(:disabled) {
+    background: var(--surface-hover);
+    border-color: var(--border);
+    color: var(--text-strong);
+  }
+
+  .button:active:not(:disabled) {
+    transform: scale(0.94);
+  }
+
+  .button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* Toggle buttons that are "on" glow like something alive. */
+  .button[data-pressed] {
+    background: var(--accent-soft);
+    border-color: rgb(46 232 255 / 0.4);
+    color: var(--glow-aqua);
+    box-shadow: var(--glow-xs);
+  }
+
+  .sm {
+    width: var(--control-sm);
+    height: var(--control-sm);
+    border-radius: var(--radius-sm);
+  }
+
+  .sm > svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .lg {
+    width: var(--control-lg);
+    height: var(--control-lg);
+  }
+
+  .lg > svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .secondary {
+    background: rgb(111 245 255 / 0.055);
+    border-color: var(--border-strong);
+    box-shadow: var(--inset-highlight);
+    color: var(--text);
+  }
+
+  .secondary:hover:not(:disabled) {
+    border-color: var(--border-glow);
+    box-shadow: var(--inset-highlight), var(--glow-xs);
+  }
+
+  .primary {
+    background: var(--gradient-glow);
+    border-color: rgb(190 252 255 / 0.5);
+    color: var(--text-on-accent);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.4);
+  }
+
+  .primary:hover:not(:disabled) {
+    background: var(--gradient-glow);
+    border-color: rgb(220 254 255 / 0.85);
+    color: var(--text-on-accent);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.5),
+      var(--glow-md);
+  }
+
+  .danger:hover:not(:disabled) {
+    background: var(--danger-soft);
+    border-color: rgb(255 79 115 / 0.5);
+    color: #ff9db1;
+  }
+
+  /* Last, and as specific as the hover rules, so the ring survives hovering a focused button. */
+  .button:focus-visible:not(:disabled) {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+}

@@ -1,0 +1,163 @@
+@layer kit {
+  .page {
+    --page-width: var(--page-max-width);
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    min-width: 0;
+  }
+
+  .page[data-width='narrow'] {
+    --page-width: 720px;
+  }
+
+  .page[data-width='wide'] {
+    --page-width: 1480px;
+  }
+
+  .page[data-width='full'] {
+    --page-width: none;
+  }
+
+  .header {
+    position: relative;
+    flex: none;
+    z-index: var(--z-sticky);
+  }
+
+  /* Match the scroller's reserved scrollbar gutter so header and body edges line up. */
+  .page[data-scroll='true'] .header {
+    padding-right: 10px;
+  }
+
+  /* A hairline of light under the header once content has scrolled beneath it. */
+  .header::after {
+    content: '';
+    position: absolute;
+    left: var(--page-gutter);
+    right: var(--page-gutter);
+    bottom: 0;
+    height: 1px;
+    background: var(--hairline-cyan);
+    opacity: 0;
+    transition: opacity var(--duration-base) ease;
+    pointer-events: none;
+  }
+
+  .header[data-scrolled]::after {
+    opacity: 0.4;
+  }
+
+  .headerInner,
+  .toolbar,
+  .content {
+    width: 100%;
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding-inline: var(--page-gutter);
+  }
+
+  .headerInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-4);
+  }
+
+  .heading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .icon {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: var(--accent-soft);
+    border: 1px solid rgb(46 232 255 / 0.28);
+    border-radius: var(--radius-md);
+    box-shadow: var(--inset-highlight), var(--glow-xs);
+    color: var(--glow-aqua);
+  }
+
+  .icon > svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .titles {
+    min-width: 0;
+  }
+
+  .title {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .subtitle {
+    margin-top: 2px;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .actions {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding-bottom: var(--space-3);
+  }
+
+  .scroller {
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+
+  .content {
+    padding-top: var(--space-1);
+    padding-bottom: var(--space-8);
+  }
+
+  .fixed {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    padding-bottom: var(--space-5);
+  }
+
+  @media (max-width: 720px) {
+    .page {
+      --page-gutter: var(--space-4);
+    }
+
+    .title {
+      font-size: var(--text-xl);
+    }
+  }
+}

@@ -1,0 +1,197 @@
+.sidebar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-width);
+  min-height: 0;
+  background: linear-gradient(180deg, rgb(7 20 36 / 0.72) 0%, rgb(3 9 21 / 0.82) 100%);
+  border-right: 1px solid var(--border-faint);
+  backdrop-filter: blur(var(--blur-glass));
+}
+
+.nav {
+  flex: 1;
+  min-height: 0;
+  padding: var(--space-4) var(--space-3);
+  overflow-y: auto;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: 38px;
+  padding: 0 var(--space-2) 0 var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: var(--text-md);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: default;
+  transition:
+    background-color var(--duration-fast) ease,
+    color var(--duration-fast) ease;
+}
+
+/* Active indicator: a bar of light on the leading edge that grows in and glows. */
+.item::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  bottom: 9px;
+  left: -1px;
+  width: 3px;
+  background: var(--gradient-glow);
+  border-radius: 0 3px 3px 0;
+  box-shadow:
+    0 0 12px rgb(46 232 255 / 0.85),
+    0 0 3px rgb(46 232 255 / 0.9);
+  opacity: 0;
+  transform: scaleY(0.2);
+  transition:
+    opacity var(--duration-base) ease,
+    transform var(--duration-slow) var(--ease-spring);
+}
+
+.item:hover {
+  background: var(--surface-hover);
+  color: var(--text-strong);
+}
+
+.item:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.item[aria-current='page'] {
+  background: linear-gradient(90deg, rgb(46 232 255 / 0.14) 0%, rgb(46 232 255 / 0.03) 100%);
+  color: var(--text-strong);
+}
+
+.item[aria-current='page']::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--text-subtle);
+  transition: color var(--duration-fast) ease;
+}
+
+.icon > svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.75;
+}
+
+.item:hover .icon {
+  color: var(--text);
+}
+
+.item[aria-current='page'] .icon {
+  color: var(--glow-aqua);
+  filter: drop-shadow(0 0 6px rgb(46 232 255 / 0.7));
+}
+
+.label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Shortcut hints stay out of the way until the pointer or focus is in the list. */
+.shortcut {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-subtle);
+  opacity: 0;
+  transition: opacity var(--duration-base) ease;
+}
+
+.nav:hover .shortcut,
+.nav:focus-within .shortcut {
+  opacity: 1;
+}
+
+.footer {
+  display: flex;
+  flex: none;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--border-faint);
+  font-size: var(--text-2xs);
+  color: var(--text-disabled);
+}
+
+.version {
+  font-family: var(--font-mono);
+}
+
+.tagline {
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.tip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tip > strong {
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.tip > span {
+  color: var(--text-muted);
+}
+
+/* ── Icon rail ─────────────────────────────────────────── */
+.sidebar[data-collapsed='true'] {
+  width: var(--sidebar-width-collapsed);
+}
+
+.sidebar[data-collapsed='true'] .nav {
+  padding-inline: var(--space-2);
+}
+
+.sidebar[data-collapsed='true'] .item {
+  justify-content: center;
+  padding: 0;
+}
+
+.sidebar[data-collapsed='true'] .label,
+.sidebar[data-collapsed='true'] .shortcut,
+.sidebar[data-collapsed='true'] .tagline {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.sidebar[data-collapsed='true'] .footer {
+  justify-content: center;
+  padding-inline: 0;
+}

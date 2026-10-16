@@ -1,0 +1,106 @@
+.shell {
+  position: relative;
+  display: grid;
+  grid-template-rows: var(--titlebar-height) minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
+  height: 100%;
+  isolation: isolate;
+}
+
+/* The frameless window's own edge: a faint luminous outline, dropped when maximised. */
+.shell::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  border: 1px solid var(--border);
+  pointer-events: none;
+  transition: border-color var(--duration-slow) ease;
+}
+
+.shell[data-focused='true']::after {
+  border-color: rgb(46 232 255 / 0.2);
+}
+
+.shell[data-maximized='true']::after {
+  display: none;
+}
+
+.shell > header {
+  grid-column: 1 / -1;
+}
+
+.shell > aside {
+  z-index: 1;
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  outline: none;
+}
+
+.view {
+  height: 100%;
+  animation: surface var(--duration-slow) var(--ease-out) both;
+}
+
+@keyframes surface {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    /* `none`, not translateY(0): a finished view must not re-anchor fixed-position children. */
+    transform: none;
+  }
+}
+
+.viewLoading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding: var(--space-6) var(--page-gutter);
+}
+
+.boot {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 100%;
+  padding: var(--space-6);
+}
+
+.fallbackDetails {
+  max-width: min(640px, 100%);
+  max-height: 120px;
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  overflow: auto;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-sm);
+  color: var(--text-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  white-space: pre-wrap;
+  user-select: text;
+}

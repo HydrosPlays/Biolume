@@ -1,0 +1,484 @@
+/*
+ * Odds view layout. One column at the minimum window width; from ~900px of
+ * content width the method setup becomes a fixed side column next to the
+ * result, chart and tables.
+ */
+.container {
+  container-type: inline-size;
+  padding-bottom: var(--space-8);
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+/* Narrow: the two columns dissolve and the panels are re-ordered so the result
+   follows the setup directly and the long-form notes come last. */
+.side,
+.main {
+  display: contents;
+}
+
+.setup {
+  order: 1;
+}
+.hero {
+  order: 2;
+}
+.curve {
+  order: 3;
+}
+.pair {
+  order: 4;
+}
+.notes {
+  order: 5;
+}
+
+@container (min-width: 900px) {
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(300px, 348px) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .side,
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    min-width: 0;
+  }
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: var(--space-4);
+  align-items: start;
+  min-width: 0;
+}
+
+.loading {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: var(--space-4);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.muted {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--text-subtle);
+}
+
+/* ── Method setup ─────────────────────────────────────────── */
+.optionOdds {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-md);
+}
+
+.numberRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.numberSlider {
+  flex: 1;
+  min-width: 80px;
+}
+
+.hintStrong {
+  color: var(--text-muted);
+}
+
+.charm {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+  transition:
+    border-color var(--duration-base) ease,
+    box-shadow var(--duration-slow) var(--ease-out);
+}
+
+/* Gold only ever marks shinies: the charm row lights up while the charm is on. */
+.charm:has([aria-checked='true']) {
+  border-color: var(--border-shiny);
+  box-shadow: var(--glow-shiny-sm);
+}
+
+.charmLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.charmLabel > svg {
+  width: 14px;
+  height: 14px;
+  color: var(--shiny);
+}
+
+.charm[data-blocked] .charmLabel > svg {
+  color: var(--text-disabled);
+}
+
+/* ── Result hero ──────────────────────────────────────────── */
+.heroMain {
+  min-width: 0;
+}
+
+.oneIn {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: var(--space-2) 0 var(--space-1);
+  font-family: var(--font-display);
+  line-height: 1;
+}
+
+.oneInPrefix {
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.oneInValue {
+  font-size: clamp(2.75rem, 7cqi, 4.5rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-strong);
+  text-shadow: var(--text-glow);
+}
+
+.oneIn[data-boosted] .oneInValue {
+  text-shadow: var(--text-glow-violet);
+}
+
+.heroSub {
+  margin: 0;
+  font-size: var(--text-md);
+  color: var(--text-muted);
+}
+
+.heroPercent {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--glow-aqua);
+}
+
+.heroNote {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-sm);
+  color: var(--text-subtle);
+}
+
+/* Comparison facts in one calm row under the headline. */
+.heroSide {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin-top: var(--space-4);
+  min-width: 0;
+}
+
+.heroBase {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-subtle);
+}
+
+.warnings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3) var(--space-4);
+  list-style: none;
+  background: var(--warn-soft);
+  border: 1px solid rgb(255 181 71 / 0.35);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text);
+}
+
+.warnings li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.warnings svg {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  margin-top: 2px;
+  color: var(--warn);
+}
+
+.breakdown {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-faint);
+}
+
+.breakdown > h3 {
+  margin: 0 0 var(--space-2);
+}
+
+.rolls {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rolls li,
+.rollTotal {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: 6px 0;
+  font-size: var(--text-sm);
+}
+
+.rolls li + li {
+  border-top: 1px dashed var(--border-faint);
+}
+
+.rollLabel {
+  flex: 1;
+  min-width: 0;
+  color: var(--text);
+}
+
+.rolls li[data-kind='charm'] .rollLabel {
+  color: var(--shiny);
+}
+
+.rollChance {
+  flex: none;
+  font-size: var(--text-xs);
+  color: var(--accent-3);
+}
+
+.rollAmount {
+  flex: none;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-strong);
+  text-align: right;
+}
+
+.rollTotal {
+  justify-content: space-between;
+  margin: 0;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.rollTotal .rollAmount {
+  color: var(--glow-aqua);
+}
+
+/* ── Curve ────────────────────────────────────────────────── */
+.curveNote {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--text-subtle);
+}
+
+/* ── Milestones ───────────────────────────────────────────── */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.table th,
+.table td {
+  padding: 9px var(--space-3);
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+.cellSub {
+  display: block;
+  margin-top: 1px;
+  font-size: var(--text-2xs);
+  color: var(--text-subtle);
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: var(--space-5);
+}
+
+.table th:last-child,
+.table td:last-child {
+  padding-right: var(--space-5);
+}
+
+.table thead th {
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  border-bottom: 1px solid var(--border);
+}
+
+.table tbody tr + tr > * {
+  border-top: 1px solid var(--border-faint);
+}
+
+.table tbody th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.table .numeric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.table thead .numeric {
+  font-family: var(--font-display);
+}
+
+.table tbody tr[data-reached] > * {
+  color: var(--text-subtle);
+}
+
+.reached {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-body);
+  color: var(--accent-2);
+}
+
+.reached svg {
+  width: 13px;
+  height: 13px;
+}
+
+.footnote {
+  font-size: var(--text-xs);
+  line-height: 1.45;
+  color: var(--text-subtle);
+}
+
+/* ── Binomial ─────────────────────────────────────────────── */
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* One shared column template so the four bars line up. */
+.bars > * {
+  grid-template-columns: 72px minmax(0, 1fr) 64px;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-faint);
+}
+
+.facts dt {
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+}
+
+.facts dd {
+  margin: 2px 0 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-strong);
+}
+
+/* ── Notes ────────────────────────────────────────────────── */
+.details {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.notes h3,
+.setup h3 {
+  margin: 0 0 var(--space-2);
+}
+
+.caveats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-xs);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.caveats li {
+  position: relative;
+  padding-left: var(--space-4);
+}
+
+.caveats li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--warn);
+  opacity: 0.75;
+}

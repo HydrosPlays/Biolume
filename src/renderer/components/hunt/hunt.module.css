@@ -1,0 +1,1051 @@
+/*
+ * Hunt view — the counter dashboard.
+ *
+ * Light follows the design language: the surface is quiet at rest, cyan blooms
+ * on the controls you touch, violet marks phases and deep-over-odds states,
+ * gold belongs to the shiny alone. All motion is transform / opacity.
+ */
+
+/* ── Page frame ───────────────────────────────────────────── */
+
+.view {
+  container: hunt / inline-size;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+.main,
+.side {
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+  align-content: start;
+}
+
+.side {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+@container hunt (min-width: 1020px) {
+  .layout {
+    grid-template-columns: minmax(0, 1.65fr) minmax(320px, 1fr);
+    align-items: start;
+  }
+
+  .side {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@container hunt (max-width: 560px) {
+  .side {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.picker {
+  width: 232px;
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--accent-3-soft);
+  border: 1px solid var(--border-violet);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text);
+}
+
+.noticeText {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+
+.heroBody {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(172px, 216px) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+/* A faint column of light behind the numeral; brighter while the panel is in use. */
+.heroBody::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    60% 70% at 64% 42%,
+    color-mix(in srgb, var(--accent) 9%, transparent) 0%,
+    transparent 70%
+  );
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity var(--duration-slow) ease;
+}
+
+.heroBody:hover::before,
+.heroBody:focus-within::before {
+  opacity: 1;
+}
+
+@container hunt (max-width: 560px) {
+  .heroBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.targetCol {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.target {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-3) var(--space-2);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  transition:
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-base) ease;
+}
+
+.target:hover {
+  background: var(--surface-hover);
+  border-color: var(--border);
+}
+
+.target:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 136px;
+  height: 136px;
+}
+
+.aura {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--shiny) 26%, transparent) 0%,
+    color-mix(in srgb, var(--shiny) 8%, transparent) 46%,
+    transparent 70%
+  );
+  animation: aura var(--duration-breath) var(--ease-in-out) infinite;
+  pointer-events: none;
+}
+
+.stage[data-empty] .aura {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 12%, transparent) 0%,
+    transparent 68%
+  );
+}
+
+.float {
+  animation: float 6.4s var(--ease-in-out) infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes aura {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.94);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.targetName {
+  max-width: 100%;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.targetMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: 20px;
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+}
+
+.heroActions {
+  display: grid;
+  gap: var(--space-2);
+}
+
+/*
+ * "Shiny found!" — armed by a hotkey or the Stream Deck, it pulses gold and a
+ * ring counts the confirmation window down. The glow is its own layer so the
+ * pulse stays opacity / transform; with reduced motion it simply stays lit.
+ */
+.shinyFound {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.shinyGlow {
+  position: absolute;
+  inset: 0 0 auto;
+  height: var(--control-md);
+  border: 1px solid var(--border-shiny);
+  border-radius: var(--radius-md);
+  box-shadow: var(--glow-shiny-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-base) ease;
+}
+
+.shinyFound[data-armed] .shinyGlow {
+  opacity: 1;
+  animation: shiny-armed 900ms var(--ease-in-out) infinite;
+}
+
+@keyframes shiny-armed {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1.045, 1.12);
+  }
+}
+
+.countdown {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+}
+
+.countdownSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  /* The arc starts at twelve o'clock. */
+  transform: rotate(-90deg);
+}
+
+.countdownTrack,
+.countdownArc {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+}
+
+.countdownTrack {
+  stroke-opacity: 0.25;
+}
+
+.countdownArc {
+  stroke-linecap: round;
+  transition: stroke-dashoffset 100ms linear;
+}
+
+.countdownDigit {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  line-height: 1;
+}
+
+/*
+ * Hangs below the button out of flow: the target column is centred in the hero,
+ * so an in-flow line would make the buttons jump up just as the second press is aimed.
+ */
+.shinyHint {
+  position: absolute;
+  top: 100%;
+  inset-inline: 0;
+  margin-top: var(--space-2);
+  color: var(--shiny);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  line-height: var(--leading-normal);
+  text-align: center;
+  text-shadow: var(--text-glow-shiny);
+}
+
+/* Stacked hero: the counter sits right below, so keep the line's space reserved instead. */
+@container hunt (max-width: 560px) {
+  .shinyHint {
+    position: static;
+    min-height: calc(var(--text-xs) * var(--leading-normal));
+  }
+}
+
+.shinyHintTime {
+  font-variant-numeric: tabular-nums;
+}
+
+/* "Stream Deck" chip in the page header while the plugin is connected. */
+.deckChip {
+  flex: none;
+}
+
+.counter {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  text-align: center;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  max-width: 100%;
+  min-width: 0;
+}
+
+.huntName {
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.phaseLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+/* The numeral sizes itself to this box: one digit-width is 0.66em of Space Grotesk. */
+.countWrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  container-type: inline-size;
+}
+
+.count,
+.countInput {
+  position: relative;
+  max-width: 100%;
+  padding: 0 var(--space-3);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-display);
+  font-size: min(var(--text-counter), calc(100cqi / (var(--units, 4) * 0.66)));
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  color: var(--text-strong);
+  text-shadow: var(--text-glow);
+}
+
+.count {
+  display: block;
+  cursor: text;
+  transition:
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease;
+}
+
+.count:hover {
+  background: var(--surface-hover);
+  border-color: var(--border);
+}
+
+.count:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.countInput {
+  width: 100%;
+  background: var(--surface-control);
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-sm);
+  text-align: center;
+  outline: none;
+}
+
+.countValue {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.tickUp {
+  animation: tick-up 240ms var(--ease-out) both;
+}
+
+.tickDown {
+  animation: tick-down 240ms var(--ease-out) both;
+}
+
+@keyframes tick-up {
+  from {
+    opacity: 0.3;
+    transform: translateY(0.1em) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes tick-down {
+  from {
+    opacity: 0.3;
+    transform: translateY(-0.1em) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* A breath of light behind the numeral on every count. */
+.halo {
+  position: absolute;
+  inset: -6% 12%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--accent) 26%, transparent),
+    transparent
+  );
+  animation: halo 560ms var(--ease-out) both;
+  pointer-events: none;
+}
+
+.halo[data-direction='down'] {
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--accent-3) 24%, transparent),
+    transparent
+  );
+}
+
+@keyframes halo {
+  from {
+    opacity: 0.95;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.22);
+  }
+}
+
+.totalLine {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.totalLine strong {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  margin-top: var(--space-1);
+}
+
+.tapWrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.tap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  padding: 0;
+  background: var(--gradient-glow);
+  border: 1px solid color-mix(in srgb, var(--glow-aqua) 70%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--ink-50) 45%, transparent),
+    var(--glow-sm);
+  color: var(--text-on-accent);
+  transition:
+    box-shadow var(--duration-base) ease,
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.tap:hover {
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--ink-50) 55%, transparent),
+    var(--glow-lg);
+  transform: scale(1.03);
+}
+
+.tap:active {
+  transform: scale(0.93);
+  transition-duration: 50ms;
+}
+
+.tap:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring), var(--glow-md);
+}
+
+.tap > svg {
+  width: 38px;
+  height: 38px;
+  stroke-width: 2.5;
+}
+
+.tapStep {
+  position: absolute;
+  bottom: 9px;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ripple {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+}
+
+.ripple[data-direction='down'] {
+  border-color: var(--accent-3);
+}
+
+.stepRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.stepHint {
+  max-width: 44ch;
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+}
+
+@media (max-height: 700px) {
+  .heroBody {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .tap {
+    width: 74px;
+    height: 74px;
+  }
+
+  .tap > svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .count,
+  .countInput {
+    font-size: min(var(--text-counter), 19vh, calc(100cqi / (var(--units, 4) * 0.66)));
+  }
+}
+
+/* ── Stat tiles ───────────────────────────────────────────── */
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+@container hunt (max-width: 560px) {
+  .tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-glass);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-md);
+  box-shadow: var(--inset-highlight);
+  text-align: left;
+}
+
+.tileWide {
+  grid-column: span 2;
+}
+
+button.tile {
+  transition:
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-base) ease;
+}
+
+button.tile:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-glow);
+  box-shadow: var(--inset-highlight), var(--glow-xs);
+}
+
+button.tile:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.tileLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  white-space: nowrap;
+}
+
+.tileLabel > svg {
+  flex: none;
+  width: 13px;
+  height: 13px;
+}
+
+.tileLabelText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tileGo {
+  margin-left: auto;
+  color: var(--text-disabled);
+  transition: color var(--duration-fast) ease;
+}
+
+button.tile:hover .tileGo {
+  color: var(--accent);
+}
+
+.tileValue {
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tile[data-tone] .tileValue {
+  color: var(--tone-text);
+}
+
+.tileHint {
+  overflow: hidden;
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Luck panel ───────────────────────────────────────────── */
+
+.luckTop {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.ringValue {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.ringLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-2xs);
+  color: var(--text-subtle);
+}
+
+.luckText {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+  justify-items: start;
+}
+
+.luckCopy {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.milestones {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-faint);
+}
+
+.milestoneNote {
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+}
+
+/* ── Phase list ───────────────────────────────────────────── */
+
+.phaseList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.phaseItem {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-4);
+  border-top: 1px solid var(--border-faint);
+}
+
+.phaseItem:first-child {
+  border-top: 0;
+}
+
+.phaseText {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.phaseName {
+  overflow: hidden;
+  font-weight: 600;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.phaseName[data-unidentified] {
+  font-style: italic;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--accent-3) 62%, var(--ink-50));
+}
+
+.phaseMeta,
+.phaseNotes {
+  overflow: hidden;
+  font-size: var(--text-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.phaseMeta {
+  color: var(--text-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.phaseNotes {
+  color: var(--text-muted);
+}
+
+.phaseActions {
+  display: flex;
+  gap: 2px;
+  opacity: 0.6;
+  transition: opacity var(--duration-fast) ease;
+}
+
+.phaseItem:hover .phaseActions,
+.phaseItem:focus-within .phaseActions {
+  opacity: 1;
+}
+
+.phaseMore {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-2);
+  border-top: 1px solid var(--border-faint);
+}
+
+/* ── Completed summary ────────────────────────────────────── */
+
+.summaryBody {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.summaryBody::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    55% 80% at 18% 50%,
+    color-mix(in srgb, var(--shiny) 13%, transparent) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+@container hunt (max-width: 620px) {
+  .summaryBody {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+.summaryStage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 176px;
+  height: 176px;
+}
+
+.summaryText {
+  position: relative;
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.summaryEyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--shiny);
+}
+
+.summaryTitle {
+  font-size: var(--text-3xl);
+  text-shadow: var(--text-glow-shiny);
+}
+
+.summarySub {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.summaryStats {
+  display: grid;
+  /* Six figures as a deliberate 3 × 2 block — auto-fit left the sixth orphaned on its own row. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4) var(--space-3);
+  max-width: 640px;
+  margin: 0;
+}
+
+.summaryStat {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.summaryStat dt {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.summaryStat dd {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.summaryActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Celebration: a burst of gold sparkles from the sprite, then stillness. */
+.celebration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.spark {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: 14px;
+  height: 14px;
+  fill: var(--shiny);
+  opacity: 0;
+  animation: spark 1500ms var(--ease-out) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes spark {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.2) rotate(0deg);
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) scale(var(--scale, 1)) rotate(140deg);
+  }
+}
+
+.burst {
+  position: absolute;
+  top: -44px;
+  left: -44px;
+  width: 88px;
+  height: 88px;
+  border: 2px solid var(--shiny);
+  border-radius: 50%;
+}
+
+/* ── Empty states ─────────────────────────────────────────── */
+
+.resume {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.resumeCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.resumeText {
+  display: grid;
+  min-width: 0;
+}
+
+.resumeName {
+  overflow: hidden;
+  font-weight: 600;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resumeMeta {
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+  font-variant-numeric: tabular-nums;
+}

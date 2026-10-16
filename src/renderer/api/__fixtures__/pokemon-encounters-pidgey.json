@@ -1,0 +1,985 @@
+[
+  {
+    "location_area": {
+      "name": "sinnoh-route-229-area",
+      "url": "https://pokeapi.co/api/v2/location-area/176/"
+    },
+    "version_details": [
+      {
+        "version": {
+          "name": "diamond",
+          "url": "https://pokeapi.co/api/v2/version/12/"
+        },
+        "max_chance": 40,
+        "encounter_details": [
+          {
+            "min_level": 51,
+            "max_level": 51,
+            "chance": 20,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-yes",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/1/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 51,
+            "max_level": 51,
+            "chance": 20,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-yes",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/1/"
+              }
+            ],
+            "pokemon_details": null
+          }
+        ]
+      },
+      {
+        "version": {
+          "name": "pearl",
+          "url": "https://pokeapi.co/api/v2/version/13/"
+        },
+        "max_chance": 40,
+        "encounter_details": [
+          {
+            "min_level": 51,
+            "max_level": 51,
+            "chance": 20,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-yes",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/1/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 51,
+            "max_level": 51,
+            "chance": 20,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-yes",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/1/"
+              }
+            ],
+            "pokemon_details": null
+          }
+        ]
+      },
+      {
+        "version": {
+          "name": "platinum",
+          "url": "https://pokeapi.co/api/v2/version/14/"
+        },
+        "max_chance": 25,
+        "encounter_details": [
+          {
+            "min_level": 50,
+            "max_level": 50,
+            "chance": 10,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 50,
+            "max_level": 50,
+            "chance": 10,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 47,
+            "max_level": 47,
+            "chance": 5,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [],
+            "pokemon_details": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "location_area": {
+      "name": "johto-route-29-area",
+      "url": "https://pokeapi.co/api/v2/location-area/185/"
+    },
+    "version_details": [
+      {
+        "version": {
+          "name": "gold",
+          "url": "https://pokeapi.co/api/v2/version/4/"
+        },
+        "max_chance": 110,
+        "encounter_details": [
+          {
+            "min_level": 2,
+            "max_level": 2,
+            "chance": 30,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 2,
+            "max_level": 2,
+            "chance": 30,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 3,
+            "max_level": 3,
+            "chance": 20,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 3,
+            "max_level": 3,
+            "chance": 20,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 4,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 4,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 1,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 1,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          }
+        ]
+      },
+      {
+        "version": {
+          "name": "silver",
+          "url": "https://pokeapi.co/api/v2/version/5/"
+        },
+        "max_chance": 110,
+        "encounter_details": [
+          {
+            "min_level": 2,
+            "max_level": 2,
+            "chance": 30,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 2,
+            "max_level": 2,
+            "chance": 30,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 3,
+            "max_level": 3,
+            "chance": 20,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 3,
+            "max_level": 3,
+            "chance": 20,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 4,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 4,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 1,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 1,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          }
+        ]
+      },
+      {
+        "version": {
+          "name": "crystal",
+          "url": "https://pokeapi.co/api/v2/version/6/"
+        },
+        "max_chance": 100,
+        "encounter_details": [
+          {
+            "min_level": 2,
+            "max_level": 2,
+            "chance": 30,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 2,
+            "max_level": 2,
+            "chance": 30,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 3,
+            "max_level": 3,
+            "chance": 20,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 3,
+            "max_level": 3,
+            "chance": 20,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "location_area": {
+      "name": "johto-route-30-area",
+      "url": "https://pokeapi.co/api/v2/location-area/187/"
+    },
+    "version_details": [
+      {
+        "version": {
+          "name": "gold",
+          "url": "https://pokeapi.co/api/v2/version/4/"
+        },
+        "max_chance": 90,
+        "encounter_details": [
+          {
+            "min_level": 2,
+            "max_level": 2,
+            "chance": 30,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 2,
+            "max_level": 2,
+            "chance": 30,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 20,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 5,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 4,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 1,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          }
+        ]
+      },
+      {
+        "version": {
+          "name": "silver",
+          "url": "https://pokeapi.co/api/v2/version/5/"
+        },
+        "max_chance": 60,
+        "encounter_details": [
+          {
+            "min_level": 2,
+            "max_level": 2,
+            "chance": 30,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 20,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 5,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 4,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 1,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          }
+        ]
+      },
+      {
+        "version": {
+          "name": "crystal",
+          "url": "https://pokeapi.co/api/v2/version/6/"
+        },
+        "max_chance": 50,
+        "encounter_details": [
+          {
+            "min_level": 3,
+            "max_level": 3,
+            "chance": 30,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 10,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 4,
+            "max_level": 4,
+            "chance": 10,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "location_area": {
+      "name": "johto-route-35-area",
+      "url": "https://pokeapi.co/api/v2/location-area/206/"
+    },
+    "version_details": [
+      {
+        "version": {
+          "name": "gold",
+          "url": "https://pokeapi.co/api/v2/version/4/"
+        },
+        "max_chance": 15,
+        "encounter_details": [
+          {
+            "min_level": 14,
+            "max_level": 14,
+            "chance": 5,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-no",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/2/"
+              },
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 14,
+            "max_level": 14,
+            "chance": 5,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-no",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/2/"
+              },
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 14,
+            "max_level": 14,
+            "chance": 5,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-yes",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/1/"
+              }
+            ],
+            "pokemon_details": null
+          }
+        ]
+      },
+      {
+        "version": {
+          "name": "silver",
+          "url": "https://pokeapi.co/api/v2/version/5/"
+        },
+        "max_chance": 15,
+        "encounter_details": [
+          {
+            "min_level": 14,
+            "max_level": 14,
+            "chance": 5,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-no",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/2/"
+              },
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 14,
+            "max_level": 14,
+            "chance": 5,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-no",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/2/"
+              },
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 14,
+            "max_level": 14,
+            "chance": 5,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-yes",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/1/"
+              }
+            ],
+            "pokemon_details": null
+          }
+        ]
+      },
+      {
+        "version": {
+          "name": "crystal",
+          "url": "https://pokeapi.co/api/v2/version/6/"
+        },
+        "max_chance": 70,
+        "encounter_details": [
+          {
+            "min_level": 14,
+            "max_level": 14,
+            "chance": 30,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-no",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/2/"
+              },
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 14,
+            "max_level": 14,
+            "chance": 30,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-no",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/2/"
+              },
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 14,
+            "max_level": 14,
+            "chance": 5,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-yes",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/1/"
+              },
+              {
+                "name": "time-day",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/4/"
+              }
+            ],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 14,
+            "max_level": 14,
+            "chance": 5,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [
+              {
+                "name": "swarm-yes",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/1/"
+              },
+              {
+                "name": "time-morning",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/3/"
+              }
+            ],
+            "pokemon_details": null
+          }
+        ]
+      }
+    ]
+  }
+]

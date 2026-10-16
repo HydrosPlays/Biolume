@@ -1,0 +1,105 @@
+/* Search rail on the left, the analyzer scrolling on its own beside it. */
+.layout {
+  display: grid;
+  grid-template-columns: clamp(248px, 27%, 320px) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+/* The analyzer reaches into the page gutter so its scrollbar sits at the window edge, like the
+   scrolling views, and the panels end exactly under the header action. */
+.analyzer {
+  container: analyzer / inline-size;
+  margin-right: calc(-1 * var(--page-gutter));
+}
+
+.viewport {
+  /* 10px is the scrollbar the stable gutter reserves (base.css). */
+  padding-right: calc(var(--page-gutter) - 10px);
+  scrollbar-gutter: stable;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+}
+
+.stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'hero'
+    'analysis'
+    'facts';
+  gap: var(--space-4);
+}
+
+.hero {
+  grid-area: hero;
+  min-width: 0;
+}
+
+.analysis {
+  grid-area: analysis;
+  min-width: 0;
+}
+
+.facts {
+  grid-area: facts;
+  min-width: 0;
+}
+
+/* Room to spare: the analysis takes the main column, identity and facts sit beside it. */
+@container analyzer (min-width: 940px) {
+  .stack {
+    grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'analysis hero'
+      'analysis facts';
+    align-items: start;
+  }
+}
+
+.offline {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--tone-soft);
+  border: 1px solid var(--tone-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+
+.offline > svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  color: var(--tone);
+}
+
+.offlineText {
+  flex: 1;
+  min-width: 0;
+}
+
+.offlineText strong {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+}
+
+.offlineText p {
+  margin: 2px 0 0;
+  color: var(--text-muted);
+}
+
+.empty {
+  display: grid;
+  place-items: center;
+  min-height: 100%;
+}

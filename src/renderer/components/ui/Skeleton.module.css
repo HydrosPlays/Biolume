@@ -1,0 +1,43 @@
+@layer kit {
+  .skeleton {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: rgb(111 245 255 / 0.06);
+  }
+
+  /* The shimmer is a translated overlay — no background-position animation. */
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgb(111 245 255 / 0.1), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 2.2s var(--ease-in-out) infinite;
+  }
+
+  .text {
+    border-radius: var(--radius-xs);
+  }
+
+  .block {
+    border-radius: var(--radius-md);
+  }
+
+  .circle {
+    border-radius: 50%;
+  }
+
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55em;
+    width: 100%;
+  }
+
+  @keyframes shimmer {
+    to {
+      transform: translateX(100%);
+    }
+  }
+}

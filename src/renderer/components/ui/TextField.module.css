@@ -1,0 +1,47 @@
+@layer kit {
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 0.93em;
+  }
+
+  /* TextArea */
+  .area {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .textarea {
+    flex: 1;
+    width: 100%;
+    min-height: 72px;
+    padding: var(--space-2) var(--space-3);
+    background: transparent;
+    border: 0;
+    outline: none;
+    color: inherit;
+    font: inherit;
+    line-height: var(--leading-normal);
+    resize: vertical;
+  }
+
+  .textarea::placeholder {
+    color: var(--text-disabled);
+  }
+
+  .noResize {
+    resize: none;
+  }
+
+  .count {
+    align-self: flex-end;
+    padding: 0 var(--space-2) var(--space-1);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    color: var(--text-subtle);
+    pointer-events: none;
+  }
+
+  .countNear {
+    color: var(--warn);
+  }
+}

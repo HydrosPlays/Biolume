@@ -1,0 +1,223 @@
+/* ── Trigger ───────────────────────────────────────────── */
+@layer kit {
+  .trigger {
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: 0 var(--space-2) 0 var(--space-3);
+    font: inherit;
+    text-align: left;
+  }
+
+  .trigger:disabled {
+    cursor: not-allowed;
+  }
+
+  .value {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  .valueLabel {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .placeholder {
+    color: var(--text-disabled);
+  }
+
+  .chevron {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    color: var(--text-subtle);
+    transition:
+      transform var(--duration-base) var(--ease-out),
+      color var(--duration-fast) ease;
+  }
+
+  .trigger[data-open='true'] .chevron {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+
+  /* ── Popup (shared with Combobox through `composes`) ───── */
+  .list {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-popover);
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+    max-width: min(520px, calc(100vw - 16px));
+    padding: var(--space-1);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--surface-popover);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg), var(--glow-xs), var(--inset-highlight);
+    outline: none;
+    -webkit-app-region: no-drag;
+    transform-origin: top center;
+    animation: unfold var(--duration-base) var(--ease-out) both;
+  }
+
+  .list[data-placement='top'] {
+    transform-origin: bottom center;
+  }
+
+  @keyframes unfold {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .group + .group,
+  .option + .group,
+  .group + .option {
+    margin-top: var(--space-1);
+    padding-top: var(--space-1);
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .groupLabel {
+    position: sticky;
+    top: calc(var(--space-1) * -1);
+    z-index: 1;
+    padding: var(--space-2) var(--space-3) var(--space-1);
+    background: var(--surface-popover);
+    font-family: var(--font-display);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--text-subtle);
+  }
+
+  .option {
+    position: relative;
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 32px;
+    padding: 6px var(--space-2) 6px var(--space-3);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    scroll-margin-block: 30px 4px;
+  }
+
+  /* The active row lights up, with a short bar of light at its leading edge. */
+  .option::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    left: 0;
+    width: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgb(46 232 255 / 0.8);
+    opacity: 0;
+    transform: scaleY(0.4);
+    transition:
+      opacity var(--duration-fast) ease,
+      transform var(--duration-fast) var(--ease-out);
+  }
+
+  .option[data-active] {
+    background: var(--surface-active);
+    color: var(--text-strong);
+  }
+
+  .option[data-active]::before {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  .option[aria-disabled='true'] {
+    opacity: 0.4;
+  }
+
+  .optionIcon {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    color: var(--text-muted);
+  }
+
+  .optionIcon > svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .optionText {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+
+  .optionLabel {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .optionDescription {
+    font-size: var(--text-xs);
+    line-height: 1.35;
+    color: var(--text-subtle);
+    white-space: normal;
+  }
+
+  .option[data-active] .optionDescription {
+    color: var(--text-muted);
+  }
+
+  .optionMeta {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-variant-numeric: tabular-nums;
+    color: var(--text-subtle);
+  }
+
+  .check {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    color: var(--accent);
+    opacity: 0;
+  }
+
+  .option[aria-selected='true'] .check {
+    opacity: 1;
+  }
+
+  .option[aria-selected='true'] .optionLabel {
+    color: var(--glow-aqua);
+  }
+
+  .empty {
+    padding: var(--space-4) var(--space-3);
+    font-size: var(--text-sm);
+    text-align: center;
+    color: var(--text-subtle);
+  }
+}

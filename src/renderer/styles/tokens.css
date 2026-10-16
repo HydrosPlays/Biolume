@@ -1,0 +1,303 @@
+/*
+ * Biolume design tokens — "abyssal bioluminescence".
+ *
+ * The palette is built like the water column: near-black abyss at the back,
+ * cold blue surfaces above it, and light that only ever comes from living
+ * things — cyan/teal glows for interaction, violet/magenta for rare states,
+ * gold reserved for shinies.
+ *
+ * Components consume the semantic tokens (--surface-*, --text-*, --accent-*).
+ * The raw ramps exist so new semantic tokens can be derived consistently.
+ */
+:root {
+  color-scheme: dark;
+
+  /* ── Abyss ramp (backgrounds) ───────────────────────────── */
+  --abyss-950: #01040a;
+  --abyss-900: #030915;
+  --abyss-850: #050e1c;
+  --abyss-800: #071424;
+  --abyss-750: #0a1b30;
+  --abyss-700: #0d233d;
+  --abyss-600: #13314f;
+  --abyss-500: #1b4368;
+  --abyss-400: #2a5b87;
+
+  /* ── Ink ramp (text on abyss) ───────────────────────────── */
+  --ink-50: #f2fbff;
+  --ink-100: #e2f4fb;
+  --ink-200: #bcd9e6;
+  --ink-300: #8fb2c4;
+  --ink-400: #64879b;
+  --ink-500: #456377;
+
+  /* ── Bioluminescent light ───────────────────────────────── */
+  --glow-cyan: #2ee8ff;
+  --glow-aqua: #6ff5ff;
+  --glow-teal: #1df2c2;
+  --glow-sea: #0fc9a8;
+  --glow-blue: #3d8bff;
+  --glow-violet: #9a6bff;
+  --neon-magenta: #ff3fe0;
+  --neon-lime: #b4ff45;
+  --shiny-gold: #ffd866;
+  --shiny-gold-deep: #ffb020;
+
+  /* ── Semantic: surfaces ─────────────────────────────────── */
+  --surface-void: var(--abyss-950);
+  --surface-0: var(--abyss-900);
+  --surface-1: var(--abyss-850);
+  --surface-2: var(--abyss-800);
+  --surface-3: var(--abyss-750);
+  --surface-raised: var(--abyss-700);
+  --surface-glass: rgb(9 24 43 / 0.62);
+  --surface-glass-strong: rgb(7 20 36 / 0.86);
+  --surface-hover: rgb(46 232 255 / 0.07);
+  --surface-active: rgb(46 232 255 / 0.13);
+  --scrim: rgb(1 4 10 / 0.72);
+
+  /* ── Semantic: lines ────────────────────────────────────── */
+  --border-faint: rgb(111 245 255 / 0.07);
+  --border: rgb(111 245 255 / 0.13);
+  --border-strong: rgb(111 245 255 / 0.26);
+  --border-glow: rgb(46 232 255 / 0.55);
+
+  /* ── Semantic: text ─────────────────────────────────────── */
+  --text: var(--ink-100);
+  --text-strong: var(--ink-50);
+  --text-muted: var(--ink-300);
+  --text-subtle: var(--ink-400);
+  --text-disabled: var(--ink-500);
+  --text-on-accent: #00161c;
+
+  /* ── Semantic: accents & status ─────────────────────────── */
+  --accent: var(--glow-cyan);
+  --accent-soft: rgb(46 232 255 / 0.16);
+  --accent-2: var(--glow-teal);
+  --accent-2-soft: rgb(29 242 194 / 0.16);
+  --accent-3: var(--glow-violet);
+  --accent-3-soft: rgb(154 107 255 / 0.18);
+  --electric: var(--neon-magenta);
+  --shiny: var(--shiny-gold);
+  --shiny-soft: rgb(255 216 102 / 0.16);
+
+  --ok: #1df2c2;
+  --ok-soft: rgb(29 242 194 / 0.14);
+  --warn: #ffb547;
+  --warn-soft: rgb(255 181 71 / 0.14);
+  --danger: #ff4f73;
+  --danger-soft: rgb(255 79 115 / 0.15);
+  --info: #3d8bff;
+  --info-soft: rgb(61 139 255 / 0.16);
+
+  /* Risk-move severities (encounter analyzer) */
+  --risk-critical: #ff4f73;
+  --risk-high: #ff8a3d;
+  --risk-medium: #ffcf4a;
+  --risk-low: #6ff5ff;
+
+  /* ── Gradients ──────────────────────────────────────────── */
+  --gradient-abyss:
+    radial-gradient(120% 80% at 50% -10%, rgb(27 67 104 / 0.55) 0%, transparent 60%),
+    radial-gradient(80% 60% at 100% 100%, rgb(154 107 255 / 0.1) 0%, transparent 55%),
+    radial-gradient(70% 55% at 0% 100%, rgb(29 242 194 / 0.08) 0%, transparent 55%),
+    linear-gradient(180deg, var(--abyss-850) 0%, var(--abyss-950) 100%);
+  --gradient-glow: linear-gradient(
+    135deg,
+    var(--glow-teal) 0%,
+    var(--glow-cyan) 48%,
+    var(--glow-blue) 100%
+  );
+  --gradient-rare: linear-gradient(
+    135deg,
+    var(--glow-cyan) 0%,
+    var(--glow-violet) 55%,
+    var(--neon-magenta) 100%
+  );
+  --gradient-shiny: linear-gradient(
+    135deg,
+    #fff3bf 0%,
+    var(--shiny-gold) 45%,
+    var(--shiny-gold-deep) 100%
+  );
+  --gradient-panel: linear-gradient(180deg, rgb(13 35 61 / 0.72) 0%, rgb(5 14 28 / 0.78) 100%);
+
+  /* ── Glows & shadows ────────────────────────────────────── */
+  --glow-xs: 0 0 6px rgb(46 232 255 / 0.35);
+  --glow-sm: 0 0 12px rgb(46 232 255 / 0.32), 0 0 2px rgb(46 232 255 / 0.6);
+  --glow-md: 0 0 24px rgb(46 232 255 / 0.3), 0 0 6px rgb(46 232 255 / 0.5);
+  --glow-lg: 0 0 48px rgb(46 232 255 / 0.28), 0 0 14px rgb(46 232 255 / 0.45);
+  --glow-teal-md: 0 0 24px rgb(29 242 194 / 0.3), 0 0 6px rgb(29 242 194 / 0.5);
+  --glow-violet-md: 0 0 24px rgb(154 107 255 / 0.34), 0 0 6px rgb(154 107 255 / 0.5);
+  --glow-shiny-md: 0 0 26px rgb(255 216 102 / 0.36), 0 0 6px rgb(255 216 102 / 0.55);
+  --glow-danger-md: 0 0 22px rgb(255 79 115 / 0.32), 0 0 6px rgb(255 79 115 / 0.5);
+  --text-glow: 0 0 18px rgb(46 232 255 / 0.55), 0 0 42px rgb(46 232 255 / 0.25);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-md: 0 8px 24px rgb(0 2 8 / 0.55);
+  --shadow-lg: 0 20px 60px rgb(0 2 8 / 0.7);
+  --inset-highlight: inset 0 1px 0 rgb(111 245 255 / 0.08);
+
+  /* ── Typography ─────────────────────────────────────────── */
+  --font-display: 'Space Grotesk Variable', 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter Variable', 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+
+  --text-2xs: 0.6875rem; /* 11 */
+  --text-xs: 0.75rem; /* 12 */
+  --text-sm: 0.8125rem; /* 13 */
+  --text-md: 0.875rem; /* 14 — body */
+  --text-lg: 1rem; /* 16 */
+  --text-xl: 1.25rem; /* 20 */
+  --text-2xl: 1.625rem; /* 26 */
+  --text-3xl: 2.25rem; /* 36 */
+  --text-counter: clamp(4.5rem, 13vw, 9.5rem);
+
+  --leading-tight: 1.15;
+  --leading-normal: 1.5;
+  --tracking-caps: 0.14em;
+
+  /* ── Space (4px grid) ───────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ── Shape ──────────────────────────────────────────────── */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  /* ── Motion ─────────────────────────────────────────────── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 420ms;
+  --duration-pulse: 3.6s;
+
+  /* ── Layout ─────────────────────────────────────────────── */
+  --titlebar-height: 38px;
+  --sidebar-width: 232px;
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-titlebar: 40;
+  --z-popover: 50;
+  --z-modal: 60;
+  --z-toast: 70;
+
+  /* ── Pokémon type colours (tuned for dark surfaces) ─────── */
+  --type-normal: #a8a892;
+  --type-fire: #ff7a3d;
+  --type-water: #4d9bff;
+  --type-electric: #ffd83d;
+  --type-grass: #5fd66a;
+  --type-ice: #7fe9ee;
+  --type-fighting: #e0503f;
+  --type-poison: #b85cd6;
+  --type-ground: #e0b862;
+  --type-flying: #9fb4ff;
+  --type-psychic: #ff5c93;
+  --type-bug: #b3cf2e;
+  --type-rock: #c9b05a;
+  --type-ghost: #8a6fd1;
+  --type-dragon: #7a5cff;
+  --type-dark: #8a7568;
+  --type-steel: #a9bdd0;
+  --type-fairy: #ff9fd6;
+  --type-stellar: #6ff5ff;
+}
+
+/*
+ * ── Renderer platform additions ──────────────────────────────
+ * Tokens the UI kit and app shell are built on. Additive only: everything
+ * above this line is the original design language and must keep its names.
+ */
+:root {
+  /* Controls (buttons, fields, selects) */
+  --control-sm: 28px;
+  --control-md: 34px;
+  --control-lg: 42px;
+  --surface-control: rgb(3 9 21 / 0.56);
+  --surface-control-hover: rgb(7 20 36 / 0.74);
+  --surface-popover: rgb(6 17 32 / 0.97);
+  --surface-sunken: rgb(1 4 10 / 0.42);
+  --border-control: rgb(111 245 255 / 0.16);
+  --border-control-hover: rgb(111 245 255 / 0.32);
+  --border-danger: rgb(255 79 115 / 0.55);
+  --border-shiny: rgb(255 216 102 / 0.5);
+  --border-violet: rgb(154 107 255 / 0.5);
+  --border-teal: rgb(29 242 194 / 0.5);
+
+  /* Focus: a crisp ring plus a soft bloom — light marks interaction. */
+  --focus-ring:
+    0 0 0 1px var(--abyss-900), 0 0 0 3px rgb(46 232 255 / 0.6), 0 0 18px rgb(46 232 255 / 0.32);
+  --focus-ring-danger:
+    0 0 0 1px var(--abyss-900), 0 0 0 3px rgb(255 79 115 / 0.6), 0 0 18px rgb(255 79 115 / 0.3);
+  --focus-ring-shiny:
+    0 0 0 1px var(--abyss-900), 0 0 0 3px rgb(255 216 102 / 0.62), 0 0 18px rgb(255 216 102 / 0.3);
+
+  /* Small accent-tinted glows (the cyan ones are --glow-xs / --glow-sm) */
+  --glow-teal-sm: 0 0 12px rgb(29 242 194 / 0.32), 0 0 2px rgb(29 242 194 / 0.6);
+  --glow-violet-sm: 0 0 12px rgb(154 107 255 / 0.36), 0 0 2px rgb(154 107 255 / 0.6);
+  --glow-shiny-sm: 0 0 12px rgb(255 216 102 / 0.36), 0 0 2px rgb(255 216 102 / 0.62);
+  --glow-danger-sm: 0 0 12px rgb(255 79 115 / 0.34), 0 0 2px rgb(255 79 115 / 0.6);
+  --glow-warn-sm: 0 0 12px rgb(255 181 71 / 0.32), 0 0 2px rgb(255 181 71 / 0.58);
+  --text-glow-soft: 0 0 12px rgb(46 232 255 / 0.4);
+  --text-glow-teal: 0 0 18px rgb(29 242 194 / 0.5), 0 0 42px rgb(29 242 194 / 0.22);
+  --text-glow-violet: 0 0 18px rgb(154 107 255 / 0.6), 0 0 42px rgb(154 107 255 / 0.26);
+  --text-glow-shiny: 0 0 18px rgb(255 216 102 / 0.6), 0 0 42px rgb(255 216 102 / 0.26);
+
+  /* Luminous hairline drawn along the top edge of glass surfaces */
+  --hairline-cyan: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(46 232 255 / 0.7) 50%,
+    transparent 100%
+  );
+  --hairline-teal: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(29 242 194 / 0.7) 50%,
+    transparent 100%
+  );
+  --hairline-violet: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(154 107 255 / 0.8) 50%,
+    transparent 100%
+  );
+  --hairline-shiny: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(255 216 102 / 0.8) 50%,
+    transparent 100%
+  );
+  --hairline-danger: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(255 79 115 / 0.8) 50%,
+    transparent 100%
+  );
+
+  --blur-glass: 14px;
+
+  /* Motion */
+  --duration-breath: 5.2s;
+  --duration-drift: 34s;
+  --duration-ripple: 620ms;
+
+  /* Layout */
+  --sidebar-width-collapsed: 60px;
+  --page-max-width: 1180px;
+  --page-gutter: var(--space-6);
+  --z-tooltip: 80;
+}

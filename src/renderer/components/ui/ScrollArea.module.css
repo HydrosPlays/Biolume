@@ -1,0 +1,52 @@
+@layer kit {
+  .frame {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .viewport {
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: inherit;
+  }
+
+  .viewport:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px rgb(46 232 255 / 0.5);
+  }
+
+  /* Edge fades: opacity-only overlays, so scrolling never repaints the content. */
+  .frame::before,
+  .frame::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 10px;
+    z-index: 1;
+    height: 28px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-base) ease;
+  }
+
+  .frame::before {
+    top: 0;
+    background: linear-gradient(180deg, rgb(3 9 21 / 0.85), transparent);
+  }
+
+  .frame::after {
+    bottom: 0;
+    background: linear-gradient(0deg, rgb(3 9 21 / 0.85), transparent);
+  }
+
+  .frame[data-fade-top]::before,
+  .frame[data-fade-bottom]::after {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,40 @@
+appId: app.biolume.desktop
+productName: Biolume
+directories:
+  output: release
+  buildResources: build
+files:
+  - out/**
+  - package.json
+asar: true
+# The Elgato Stream Deck plugin installer (the plugin build writes it to build/streamdeck/).
+# The packaged app opens it from <resources>/streamdeck/ — see src/main/streamDeckPlugin.ts.
+extraResources:
+  - from: build/streamdeck
+    to: streamdeck
+    filter:
+      - '*.streamDeckPlugin'
+# Master artwork (1254 px); macOS and Linux convert it. Windows uses the prepared .ico below.
+# build/icon.ico and the other derived sizes come from `npx electron scripts/resize-images.mjs`.
+icon: build/icon.png
+win:
+  # Exe, portable exe, Start-menu / desktop shortcuts and the taskbar of the packaged app.
+  icon: build/icon.ico
+  target:
+    - nsis
+    - portable
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  shortcutName: Biolume
+  installerIcon: build/icon.ico
+  # Also shown for Biolume in Settings > Apps.
+  uninstallerIcon: build/icon.ico
+mac:
+  category: public.app-category.utilities
+  target:
+    - dmg
+linux:
+  category: Utility
+  target:
+    - AppImage

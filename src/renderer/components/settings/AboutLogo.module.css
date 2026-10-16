@@ -1,0 +1,33 @@
+.brand {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  isolation: isolate;
+}
+
+/*
+ * A pool of light behind the wordmark, faded out radially, so the artwork sits in
+ * the panel without a frame or a hard edge.
+ */
+.brand::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+      closest-side,
+      color-mix(in srgb, var(--glow-cyan) 16%, transparent) 0%,
+      color-mix(in srgb, var(--glow-blue) 7%, transparent) 55%,
+      transparent 100%
+    )
+    center / min(100%, 420px) 100% no-repeat;
+  pointer-events: none;
+}
+
+.logo {
+  display: block;
+  width: min(100%, 264px);
+  height: auto;
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--glow-cyan) 22%, transparent));
+  user-select: none;
+}

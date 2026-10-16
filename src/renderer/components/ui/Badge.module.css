@@ -1,0 +1,242 @@
+/* ── Badge ─────────────────────────────────────────────── */
+@layer kit {
+  .badge {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 5px;
+    height: 22px;
+    padding: 0 8px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-xs);
+    font-weight: 560;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .badge.sm {
+    height: 18px;
+    padding: 0 6px;
+    font-size: var(--text-2xs);
+  }
+
+  .soft {
+    background: var(--tone-soft);
+    border-color: color-mix(in srgb, var(--tone-border) 55%, transparent);
+    color: var(--tone-text);
+  }
+
+  .outline {
+    border-color: var(--tone-border);
+    color: var(--tone-text);
+  }
+
+  .solid {
+    background: var(--tone);
+    color: var(--text-on-accent);
+    font-weight: 650;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--tone);
+    box-shadow: 0 0 6px var(--tone);
+  }
+
+  .solid .dot {
+    background: currentColor;
+    box-shadow: none;
+  }
+
+  .pulse {
+    animation: pulse var(--duration-pulse) var(--ease-in-out) infinite;
+  }
+
+  .icon {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+  }
+
+  .icon > svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: scale(0.85);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.15);
+    }
+  }
+
+  /* ── Chip ──────────────────────────────────────────────── */
+  .chip {
+    display: inline-flex;
+    flex: none;
+    align-items: stretch;
+    height: 28px;
+    background: rgb(111 245 255 / 0.045);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    transition:
+      background-color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease,
+      color var(--duration-fast) ease,
+      box-shadow var(--duration-base) ease;
+  }
+
+  .chip.sm {
+    height: 22px;
+    font-size: var(--text-xs);
+  }
+
+  .chipButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 12px;
+    background: none;
+    border: 0;
+    border-radius: inherit;
+    color: inherit;
+    font: inherit;
+    white-space: nowrap;
+  }
+
+  .sm .chipButton {
+    padding: 0 9px;
+  }
+
+  .removable .chipButton {
+    padding-right: 4px;
+  }
+
+  .chipLabel {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .clickable:hover:not([data-disabled]) {
+    background: var(--surface-hover);
+    border-color: var(--border-strong);
+    color: var(--text-strong);
+  }
+
+  .chip[data-selected] {
+    background: var(--tone-soft);
+    border-color: var(--tone-border);
+    color: var(--tone-text);
+    box-shadow: var(--tone-glow);
+  }
+
+  .chip[data-disabled] {
+    opacity: 0.45;
+  }
+
+  .chipButton:focus-visible,
+  .remove:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    margin: 2px 2px 2px 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 50%;
+    color: var(--text-subtle);
+    transition:
+      background-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
+  }
+
+  .remove:hover:not(:disabled) {
+    background: rgb(255 79 115 / 0.16);
+    color: #ff9db1;
+  }
+
+  .remove > svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* ── TypeBadge ─────────────────────────────────────────── */
+  .type {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    min-width: 58px;
+    padding: 0 9px;
+    background: color-mix(in srgb, var(--type-color) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--type-color) 46%, transparent);
+    border-radius: var(--radius-pill);
+    color: color-mix(in srgb, var(--type-color) 72%, white);
+    font-family: var(--font-display);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .type.sm {
+    height: 18px;
+    min-width: 48px;
+    padding: 0 7px;
+    font-size: 10px;
+  }
+
+  .typeButton {
+    opacity: 0.62;
+    transition:
+      opacity var(--duration-fast) ease,
+      background-color var(--duration-fast) ease,
+      box-shadow var(--duration-base) ease;
+  }
+
+  .typeButton:hover {
+    opacity: 1;
+  }
+
+  .typeButton[data-selected] {
+    opacity: 1;
+    background: color-mix(in srgb, var(--type-color) 30%, transparent);
+    border-color: var(--type-color);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--type-color) 42%, transparent);
+  }
+
+  .typeButton:focus-visible {
+    outline: none;
+    opacity: 1;
+    box-shadow: var(--focus-ring);
+  }
+
+  .typeDot {
+    display: inline-block;
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--type-color);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--type-color) 60%, transparent);
+  }
+}

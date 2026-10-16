@@ -1,0 +1,239 @@
+[
+  {
+    "location_area": {
+      "name": "pallet-town-area",
+      "url": "https://pokeapi.co/api/v2/location-area/285/"
+    },
+    "version_details": [
+      {
+        "version": {
+          "name": "lets-go-eevee",
+          "url": "https://pokeapi.co/api/v2/version/32/"
+        },
+        "max_chance": 100,
+        "encounter_details": [
+          {
+            "min_level": 5,
+            "max_level": 5,
+            "chance": 100,
+            "method": {
+              "name": "gift",
+              "url": "https://pokeapi.co/api/v2/encounter-method/18/"
+            },
+            "condition_values": [],
+            "pokemon_details": {
+              "min_perfect_ivs": null,
+              "always_shiny": false,
+              "never_shiny": true,
+              "is_alpha": false
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "location_area": {
+      "name": "castelia-city-area",
+      "url": "https://pokeapi.co/api/v2/location-area/656/"
+    },
+    "version_details": [
+      {
+        "version": {
+          "name": "black-2",
+          "url": "https://pokeapi.co/api/v2/version/21/"
+        },
+        "max_chance": 110,
+        "encounter_details": [
+          {
+            "min_level": 19,
+            "max_level": 19,
+            "chance": 4,
+            "method": {
+              "name": "dark-grass",
+              "url": "https://pokeapi.co/api/v2/encounter-method/8/"
+            },
+            "condition_values": [],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 19,
+            "max_level": 19,
+            "chance": 1,
+            "method": {
+              "name": "dark-grass",
+              "url": "https://pokeapi.co/api/v2/encounter-method/8/"
+            },
+            "condition_values": [],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 18,
+            "max_level": 18,
+            "chance": 4,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 18,
+            "max_level": 18,
+            "chance": 1,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 10,
+            "max_level": 10,
+            "chance": 100,
+            "method": {
+              "name": "gift",
+              "url": "https://pokeapi.co/api/v2/encounter-method/18/"
+            },
+            "condition_values": [],
+            "pokemon_details": null
+          }
+        ]
+      },
+      {
+        "version": {
+          "name": "white-2",
+          "url": "https://pokeapi.co/api/v2/version/22/"
+        },
+        "max_chance": 110,
+        "encounter_details": [
+          {
+            "min_level": 19,
+            "max_level": 19,
+            "chance": 4,
+            "method": {
+              "name": "dark-grass",
+              "url": "https://pokeapi.co/api/v2/encounter-method/8/"
+            },
+            "condition_values": [],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 19,
+            "max_level": 19,
+            "chance": 1,
+            "method": {
+              "name": "dark-grass",
+              "url": "https://pokeapi.co/api/v2/encounter-method/8/"
+            },
+            "condition_values": [],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 18,
+            "max_level": 18,
+            "chance": 4,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 18,
+            "max_level": 18,
+            "chance": 1,
+            "method": {
+              "name": "walk",
+              "url": "https://pokeapi.co/api/v2/encounter-method/1/"
+            },
+            "condition_values": [],
+            "pokemon_details": null
+          },
+          {
+            "min_level": 10,
+            "max_level": 10,
+            "chance": 100,
+            "method": {
+              "name": "gift",
+              "url": "https://pokeapi.co/api/v2/encounter-method/18/"
+            },
+            "condition_values": [],
+            "pokemon_details": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "location_area": {
+      "name": "meetup-spot-area",
+      "url": "https://pokeapi.co/api/v2/location-area/1371/"
+    },
+    "version_details": [
+      {
+        "version": {
+          "name": "sword",
+          "url": "https://pokeapi.co/api/v2/version/33/"
+        },
+        "max_chance": 100,
+        "encounter_details": [
+          {
+            "min_level": 10,
+            "max_level": 10,
+            "chance": 100,
+            "method": {
+              "name": "gift",
+              "url": "https://pokeapi.co/api/v2/encounter-method/18/"
+            },
+            "condition_values": [
+              {
+                "name": "save-data-from-lets-go-eevee",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/207/"
+              }
+            ],
+            "pokemon_details": {
+              "min_perfect_ivs": null,
+              "always_shiny": false,
+              "never_shiny": true,
+              "is_alpha": false
+            }
+          }
+        ]
+      },
+      {
+        "version": {
+          "name": "shield",
+          "url": "https://pokeapi.co/api/v2/version/34/"
+        },
+        "max_chance": 100,
+        "encounter_details": [
+          {
+            "min_level": 10,
+            "max_level": 10,
+            "chance": 100,
+            "method": {
+              "name": "gift",
+              "url": "https://pokeapi.co/api/v2/encounter-method/18/"
+            },
+            "condition_values": [
+              {
+                "name": "save-data-from-lets-go-eevee",
+                "url": "https://pokeapi.co/api/v2/encounter-condition-value/207/"
+              }
+            ],
+            "pokemon_details": {
+              "min_perfect_ivs": null,
+              "always_shiny": false,
+              "never_shiny": true,
+              "is_alpha": false
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

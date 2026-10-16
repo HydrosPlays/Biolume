@@ -1,0 +1,236 @@
+/* Accent → light colour, shared by Panel and Card. */
+@layer kit {
+  .panel,
+  .card {
+    --surface-light: transparent;
+    --surface-hairline: none;
+    --surface-bloom: 0 0 0 transparent;
+    --surface-lit-border: var(--border-strong);
+    --surface-tint: transparent;
+  }
+
+  .panel[data-accent='cyan'],
+  .card[data-accent='cyan'] {
+    --surface-hairline: var(--hairline-cyan);
+    --surface-bloom: var(--glow-md);
+    --surface-lit-border: var(--border-glow);
+    --surface-tint: rgb(46 232 255 / 0.07);
+  }
+
+  .panel[data-accent='teal'],
+  .card[data-accent='teal'] {
+    --surface-hairline: var(--hairline-teal);
+    --surface-bloom: var(--glow-teal-md);
+    --surface-lit-border: var(--border-teal);
+    --surface-tint: rgb(29 242 194 / 0.07);
+  }
+
+  .panel[data-accent='violet'],
+  .card[data-accent='violet'] {
+    --surface-hairline: var(--hairline-violet);
+    --surface-bloom: var(--glow-violet-md);
+    --surface-lit-border: var(--border-violet);
+    --surface-tint: rgb(154 107 255 / 0.09);
+  }
+
+  .panel[data-accent='shiny'],
+  .card[data-accent='shiny'] {
+    --surface-hairline: var(--hairline-shiny);
+    --surface-bloom: var(--glow-shiny-md);
+    --surface-lit-border: var(--border-shiny);
+    --surface-tint: rgb(255 216 102 / 0.07);
+  }
+
+  .panel[data-accent='danger'],
+  .card[data-accent='danger'] {
+    --surface-hairline: var(--hairline-danger);
+    --surface-bloom: var(--glow-danger-md);
+    --surface-lit-border: var(--border-danger);
+    --surface-tint: rgb(255 79 115 / 0.07);
+  }
+
+  /* ── Panel ─────────────────────────────────────────────── */
+  .panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--gradient-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--inset-highlight), var(--shadow-md);
+    backdrop-filter: blur(var(--blur-glass)) saturate(125%);
+  }
+
+  /* The luminous hairline: light caught on the top edge of the glass. */
+  .panel::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 12%;
+    right: 12%;
+    height: 1px;
+    background: var(--surface-hairline);
+    opacity: 0.55;
+    pointer-events: none;
+    transition: opacity var(--duration-slow) ease;
+  }
+
+  .panel:hover::before,
+  .panel:focus-within::before {
+    opacity: 1;
+  }
+
+  .panel[data-glow] {
+    border-color: var(--surface-lit-border);
+    box-shadow: var(--inset-highlight), var(--shadow-md), var(--surface-bloom);
+  }
+
+  .panel[data-glow]::before {
+    opacity: 1;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: 46px;
+    padding: var(--space-3) var(--space-4) var(--space-3) var(--space-5);
+    border-bottom: 1px solid var(--border-faint);
+  }
+
+  .heading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  .icon {
+    display: inline-flex;
+    flex: none;
+    color: var(--text-subtle);
+  }
+
+  .icon > svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .titles {
+    min-width: 0;
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .subtitle {
+    margin-top: 2px;
+    font-size: var(--text-xs);
+    color: var(--text-subtle);
+  }
+
+  .actions {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .body {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-5);
+    border-top: 1px solid var(--border-faint);
+    font-size: var(--text-xs);
+    color: var(--text-subtle);
+  }
+
+  .pad-none {
+    padding: 0;
+  }
+
+  .pad-sm {
+    padding: var(--space-3);
+  }
+
+  .pad-md {
+    padding: var(--space-5);
+  }
+
+  .pad-lg {
+    padding: var(--space-6) var(--space-8);
+  }
+
+  /* ── Card ──────────────────────────────────────────────── */
+  .card {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    background: var(--surface-glass);
+    border: 1px solid var(--border-faint);
+    border-radius: var(--radius-md);
+    box-shadow: var(--inset-highlight);
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    transition:
+      border-color var(--duration-fast) ease,
+      background-color var(--duration-fast) ease,
+      box-shadow var(--duration-base) ease,
+      transform var(--duration-base) var(--ease-out);
+  }
+
+  .interactive:hover:not(:disabled) {
+    background: rgb(13 35 61 / 0.72);
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+    box-shadow: var(--inset-highlight), var(--shadow-sm);
+  }
+
+  .interactive:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .card:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .card:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .card[data-selected] {
+    background: linear-gradient(var(--surface-tint), var(--surface-tint)), var(--surface-glass);
+    border-color: var(--surface-lit-border);
+    box-shadow: var(--inset-highlight), var(--glow-xs);
+  }
+
+  .card.pad-md {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .card.pad-lg {
+    padding: var(--space-5);
+  }
+}

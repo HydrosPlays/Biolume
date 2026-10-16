@@ -1,0 +1,136 @@
+{
+  "$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+  "UUID": "app.biolume.streamdeck",
+  "Name": "Biolume",
+  "Version": "0.1.0.0",
+  "Author": "Biolume",
+  "Description": "Shiny-hunting keys for Biolume: count encounters, log phases and confirm shinies, with the live count right on your Stream Deck.",
+  "Icon": "imgs/plugin/marketplace",
+  "Category": "Biolume",
+  "CategoryIcon": "imgs/plugin/category",
+  "CodePath": "bin/plugin.js",
+  "SDKVersion": 3,
+  "Software": {
+    "MinimumVersion": "7.1"
+  },
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    },
+    {
+      "Platform": "mac",
+      "MinimumVersion": "12"
+    }
+  ],
+  "Nodejs": {
+    "Version": "24"
+  },
+  "Actions": [
+    {
+      "UUID": "app.biolume.streamdeck.counter",
+      "Name": "Counter",
+      "Icon": "imgs/actions/counter/icon",
+      "Tooltip": "Shows the active hunt's encounter count (and its shiny sprite). Press to count an encounter.",
+      "Controllers": ["Keypad"],
+      "UserTitleEnabled": false,
+      "SupportedInMultiActions": false,
+      "States": [
+        {
+          "Image": "imgs/actions/counter/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "app.biolume.streamdeck.increment",
+      "Name": "Increment",
+      "Icon": "imgs/actions/increment/icon",
+      "Tooltip": "Counts an encounter (adds the hunt's step).",
+      "Controllers": ["Keypad"],
+      "UserTitleEnabled": false,
+      "SupportedInMultiActions": true,
+      "States": [
+        {
+          "Image": "imgs/actions/increment/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "app.biolume.streamdeck.decrement",
+      "Name": "Decrement",
+      "Icon": "imgs/actions/decrement/icon",
+      "Tooltip": "Takes one step back off the count.",
+      "Controllers": ["Keypad"],
+      "UserTitleEnabled": false,
+      "SupportedInMultiActions": true,
+      "States": [
+        {
+          "Image": "imgs/actions/decrement/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "app.biolume.streamdeck.logphase",
+      "Name": "Log Phase",
+      "Icon": "imgs/actions/logphase/icon",
+      "Tooltip": "Quick-logs a phase (an off-target shiny) and starts the count over.",
+      "Controllers": ["Keypad"],
+      "UserTitleEnabled": false,
+      "SupportedInMultiActions": true,
+      "States": [
+        {
+          "Image": "imgs/actions/logphase/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "app.biolume.streamdeck.shinyfound",
+      "Name": "Shiny Found",
+      "Icon": "imgs/actions/shinyfound/icon",
+      "Tooltip": "Marks the target as found. Press twice within 3 seconds to confirm; undoable.",
+      "Controllers": ["Keypad"],
+      "UserTitleEnabled": false,
+      "SupportedInMultiActions": true,
+      "States": [
+        {
+          "Image": "imgs/actions/shinyfound/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "app.biolume.streamdeck.undo",
+      "Name": "Undo",
+      "Icon": "imgs/actions/undo/icon",
+      "Tooltip": "Reverts the hunt's last change.",
+      "Controllers": ["Keypad"],
+      "UserTitleEnabled": false,
+      "SupportedInMultiActions": true,
+      "States": [
+        {
+          "Image": "imgs/actions/undo/key",
+          "ShowTitle": false
+        }
+      ]
+    },
+    {
+      "UUID": "app.biolume.streamdeck.overlay",
+      "Name": "Toggle Overlay",
+      "Icon": "imgs/actions/overlay/icon",
+      "Tooltip": "Shows or hides Biolume's mini-overlay.",
+      "Controllers": ["Keypad"],
+      "UserTitleEnabled": false,
+      "SupportedInMultiActions": true,
+      "States": [
+        {
+          "Image": "imgs/actions/overlay/key",
+          "ShowTitle": false
+        }
+      ]
+    }
+  ]
+}

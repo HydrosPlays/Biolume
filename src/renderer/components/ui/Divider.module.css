@@ -1,0 +1,74 @@
+@layer kit {
+  .divider {
+    flex: none;
+    border: 0;
+  }
+
+  .horizontal {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--border) 12%,
+      var(--border) 88%,
+      transparent
+    );
+  }
+
+  .vertical {
+    align-self: stretch;
+    width: 1px;
+    min-height: 14px;
+    background: var(--border);
+  }
+
+  .labelled {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    height: auto;
+    background: none;
+  }
+
+  .labelled::before,
+  .labelled::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .label {
+    font-family: var(--font-display);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--text-subtle);
+  }
+
+  .horizontal.space-sm {
+    margin-block: var(--space-2);
+  }
+
+  .horizontal.space-md {
+    margin-block: var(--space-4);
+  }
+
+  .horizontal.space-lg {
+    margin-block: var(--space-6);
+  }
+
+  .vertical.space-sm {
+    margin-inline: var(--space-1);
+  }
+
+  .vertical.space-md {
+    margin-inline: var(--space-2);
+  }
+
+  .vertical.space-lg {
+    margin-inline: var(--space-4);
+  }
+}

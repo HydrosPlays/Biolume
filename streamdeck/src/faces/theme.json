@@ -1,0 +1,75 @@
+{
+  "$comment": "Single source for the plugin's look: read by src/faces/render.ts (live key faces) and scripts/streamdeck-icons.mjs (manifest images). Colours mirror src/renderer/styles/tokens.css; glyphs are 24 x 24 line icons (stroke paths are drawn with round caps, fill paths are solid).",
+  "palette": {
+    "abyss950": "#01040a",
+    "abyss900": "#030915",
+    "abyss850": "#050e1c",
+    "abyss800": "#071424",
+    "abyss700": "#0d233d",
+    "abyss600": "#13314f",
+    "abyss500": "#1b4368",
+    "ink50": "#f2fbff",
+    "ink100": "#e2f4fb",
+    "ink300": "#8fb2c4",
+    "ink400": "#64879b",
+    "ink500": "#456377",
+    "cyan": "#2ee8ff",
+    "aqua": "#6ff5ff",
+    "teal": "#1df2c2",
+    "gold": "#ffd866",
+    "goldDeep": "#ffb020",
+    "goldPale": "#fff3bf",
+    "danger": "#ff4f73"
+  },
+  "actions": {
+    "counter": {
+      "label": "Counter",
+      "tone": "glow",
+      "glyph": {
+        "stroke": ["M6 5v14", "M10 5v14", "M14 5v14", "M18 5v14", "M3.5 16.5 20.5 7.5"],
+        "fill": []
+      }
+    },
+    "increment": {
+      "label": "+1",
+      "tone": "glow",
+      "glyph": { "stroke": ["M12 5v14", "M5 12h14"], "fill": [] }
+    },
+    "decrement": {
+      "label": "−1",
+      "tone": "glow",
+      "glyph": { "stroke": ["M5 12h14"], "fill": [] }
+    },
+    "logphase": {
+      "label": "Log phase",
+      "tone": "glow",
+      "glyph": { "stroke": ["M5.5 21V3.5", "M5.5 4h12.5l-2.75 4.75L18 13.5H5.5"], "fill": [] }
+    },
+    "shinyfound": {
+      "label": "Shiny!",
+      "tone": "shiny",
+      "glyph": {
+        "stroke": [],
+        "fill": [
+          "M11 3.5Q12 11 19.5 12Q12 13 11 20.5Q10 13 2.5 12Q10 11 11 3.5Z",
+          "M19 2Q19.3 4.2 21.5 4.5Q19.3 4.8 19 7Q18.7 4.8 16.5 4.5Q18.7 4.2 19 2Z"
+        ]
+      }
+    },
+    "undo": {
+      "label": "Undo",
+      "tone": "glow",
+      "glyph": { "stroke": ["M9 14.5 4 9.5l5-5", "M4 9.5h10.5a5.5 5.5 0 0 1 0 11H11"], "fill": [] }
+    },
+    "overlay": {
+      "label": "Overlay",
+      "tone": "glow",
+      "glyph": {
+        "stroke": ["M5 4.5h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2z"],
+        "fill": [
+          "M12.5 11.5h5a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-3.5a1 1 0 0 1 1-1z"
+        ]
+      }
+    }
+  }
+}

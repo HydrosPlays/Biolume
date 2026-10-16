@@ -1,0 +1,73 @@
+@layer kit {
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  .horizontal {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .horizontal .labelRow {
+    flex: 1;
+    min-height: var(--control-md);
+    align-items: center;
+  }
+
+  .horizontal .body {
+    flex: none;
+    align-items: flex-end;
+  }
+
+  .labelRow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .label {
+    font-size: var(--text-sm);
+    font-weight: 550;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .required {
+    margin-left: 3px;
+    color: var(--accent);
+  }
+
+  .trailing {
+    flex: none;
+    font-size: var(--text-xs);
+    color: var(--text-subtle);
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  .hint,
+  .error {
+    font-size: var(--text-xs);
+    line-height: 1.45;
+  }
+
+  .hint {
+    color: var(--text-subtle);
+  }
+
+  .error {
+    color: #ff93a9;
+  }
+}

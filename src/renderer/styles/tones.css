@@ -1,0 +1,77 @@
+/*
+ * Tone variables. Any element carrying `data-tone` exposes one colour family
+ * to itself and its descendants:
+ *
+ *   --tone         the light itself (icons, borders at full strength, text accents)
+ *   --tone-text    a readable text colour in that family
+ *   --tone-soft    translucent fill
+ *   --tone-border  resting border
+ *   --tone-glow    box-shadow bloom for lit states
+ *
+ * Meaning follows the design language: cyan / teal = interaction and health,
+ * violet = rare or special, shiny (gold) = shinies only, the rest are status.
+ */
+[data-tone='neutral'] {
+  --tone: var(--ink-200);
+  --tone-text: var(--ink-200);
+  --tone-soft: rgb(188 217 230 / 0.08);
+  --tone-border: rgb(188 217 230 / 0.2);
+  --tone-glow: 0 0 0 transparent;
+}
+[data-tone='accent'] {
+  --tone: var(--glow-cyan);
+  --tone-text: var(--glow-aqua);
+  --tone-soft: var(--accent-soft);
+  --tone-border: rgb(46 232 255 / 0.4);
+  --tone-glow: var(--glow-sm);
+}
+[data-tone='teal'],
+[data-tone='ok'] {
+  --tone: var(--glow-teal);
+  --tone-text: #7dfbe0;
+  --tone-soft: var(--accent-2-soft);
+  --tone-border: rgb(29 242 194 / 0.4);
+  --tone-glow: var(--glow-teal-sm);
+}
+[data-tone='violet'] {
+  --tone: var(--glow-violet);
+  --tone-text: #c8b2ff;
+  --tone-soft: var(--accent-3-soft);
+  --tone-border: rgb(154 107 255 / 0.48);
+  --tone-glow: var(--glow-violet-sm);
+}
+[data-tone='magenta'] {
+  --tone: var(--neon-magenta);
+  --tone-text: #ff9df0;
+  --tone-soft: rgb(255 63 224 / 0.14);
+  --tone-border: rgb(255 63 224 / 0.45);
+  --tone-glow: 0 0 12px rgb(255 63 224 / 0.34), 0 0 2px rgb(255 63 224 / 0.6);
+}
+[data-tone='shiny'] {
+  --tone: var(--shiny-gold);
+  --tone-text: #ffe69a;
+  --tone-soft: var(--shiny-soft);
+  --tone-border: rgb(255 216 102 / 0.46);
+  --tone-glow: var(--glow-shiny-sm);
+}
+[data-tone='warn'] {
+  --tone: var(--warn);
+  --tone-text: #ffcd85;
+  --tone-soft: var(--warn-soft);
+  --tone-border: rgb(255 181 71 / 0.44);
+  --tone-glow: var(--glow-warn-sm);
+}
+[data-tone='danger'] {
+  --tone: var(--danger);
+  --tone-text: #ff93a9;
+  --tone-soft: var(--danger-soft);
+  --tone-border: rgb(255 79 115 / 0.46);
+  --tone-glow: var(--glow-danger-sm);
+}
+[data-tone='info'] {
+  --tone: var(--info);
+  --tone-text: #9cc4ff;
+  --tone-soft: var(--info-soft);
+  --tone-border: rgb(61 139 255 / 0.46);
+  --tone-glow: 0 0 12px rgb(61 139 255 / 0.34), 0 0 2px rgb(61 139 255 / 0.6);
+}

@@ -1,0 +1,294 @@
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  min-width: 0;
+}
+
+/* A fixed-height box: the SVG is absolutely positioned inside it, so measuring
+   the box can never change its size (no resize feedback loop). */
+.chart {
+  position: relative;
+  height: clamp(220px, 36vh, 340px);
+  min-width: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(90% 120% at 100% 0%, rgb(46 232 255 / 0.05) 0%, transparent 60%),
+    var(--surface-sunken);
+  border: 1px solid var(--border-faint);
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: visible;
+}
+
+/* ── Axes ─────────────────────────────────────────────────── */
+.grid {
+  stroke: var(--border-faint);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.axis,
+.tickMark {
+  stroke: var(--border-strong);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.tick {
+  fill: var(--text-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Curves ───────────────────────────────────────────────── */
+.gradientTop {
+  stop-color: var(--accent);
+  stop-opacity: 0.26;
+}
+
+.gradientBottom {
+  stop-color: var(--accent);
+  stop-opacity: 0;
+}
+
+.area {
+  stroke: none;
+}
+
+.line,
+.lineGlow,
+.comparison {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.line {
+  stroke: var(--glow-aqua);
+  stroke-width: 2;
+}
+
+/* The bloom: a wide, faint copy of the line underneath it. */
+.lineGlow {
+  stroke: var(--accent);
+  stroke-width: 7;
+  opacity: 0.2;
+  filter: blur(3px);
+}
+
+.comparison {
+  stroke: var(--ink-400);
+  stroke-width: 1.5;
+  opacity: 0.55;
+}
+
+/* ── Milestones ───────────────────────────────────────────── */
+.marker {
+  stroke: var(--accent-3);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  opacity: 0.6;
+}
+
+.markerDot {
+  fill: var(--surface-0);
+  stroke: var(--accent-3);
+  stroke-width: 1.5;
+}
+
+.markerLabel {
+  fill: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── You are here ─────────────────────────────────────────── */
+.hereLine {
+  stroke: var(--accent-2);
+  stroke-width: 1;
+  opacity: 0.7;
+}
+
+.hereDot {
+  fill: var(--accent-2);
+  stroke: var(--surface-0);
+  stroke-width: 1.5;
+}
+
+.hereHalo {
+  fill: var(--accent-2);
+  opacity: 0.22;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: here-breathe var(--duration-pulse) var(--ease-in-out) infinite;
+}
+
+.hereLabel {
+  fill: var(--accent-2);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: var(--surface-0);
+  stroke-width: 3px;
+}
+
+@keyframes here-breathe {
+  0%,
+  100% {
+    transform: scale(0.7);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.08;
+  }
+}
+
+/* ── Crosshair ────────────────────────────────────────────── */
+.crosshair {
+  stroke: var(--border-glow);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.crosshairDot {
+  fill: var(--glow-aqua);
+  stroke: var(--surface-0);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 6px var(--accent));
+}
+
+.crosshairComparison {
+  fill: var(--ink-300);
+  stroke: var(--surface-0);
+  stroke-width: 1.5;
+}
+
+.surface {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  cursor: crosshair;
+  outline: none;
+  touch-action: none;
+}
+
+.surface:focus-visible {
+  box-shadow:
+    inset 0 0 0 1px var(--border-glow),
+    inset 0 0 22px rgb(46 232 255 / 0.14);
+}
+
+.tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-popover);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md), var(--glow-xs);
+  font-size: var(--text-xs);
+  color: var(--text);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.tooltipCount {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.tooltipRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.tooltipName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-muted);
+}
+
+.tooltipValue {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-strong);
+}
+
+/* ── Legend & summary ─────────────────────────────────────── */
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.swatch {
+  flex: none;
+  width: 14px;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--glow-aqua);
+}
+
+.swatch[data-series='main'] {
+  box-shadow: var(--glow-xs);
+}
+
+.swatch[data-series='comparison'] {
+  background: var(--ink-400);
+}
+
+.swatch[data-series='marker'] {
+  background: repeating-linear-gradient(90deg, var(--accent-3) 0 3px, transparent 3px 6px);
+}
+
+.swatch[data-series='here'] {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-2);
+}
+
+.summary {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--text-muted);
+}

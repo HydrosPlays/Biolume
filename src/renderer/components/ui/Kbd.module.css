@@ -1,0 +1,41 @@
+@layer kit {
+  .combo {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    white-space: nowrap;
+  }
+
+  .key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    background: linear-gradient(180deg, rgb(27 67 104 / 0.55) 0%, rgb(10 27 48 / 0.85) 100%);
+    border: 1px solid var(--border-strong);
+    border-bottom-width: 2px;
+    border-radius: var(--radius-xs);
+    box-shadow: var(--inset-highlight);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .sm {
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    font-size: 10px;
+    border-bottom-width: 1px;
+  }
+
+  .plus {
+    color: var(--text-subtle);
+    font-size: var(--text-2xs);
+  }
+}

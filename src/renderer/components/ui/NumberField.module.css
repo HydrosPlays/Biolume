@@ -1,0 +1,70 @@
+@layer kit {
+  .field {
+    display: inline-flex;
+    flex: none;
+    overflow: hidden;
+  }
+
+  .input {
+    flex: 1 1 auto;
+    min-width: 3ch;
+    font-family: var(--font-display);
+    font-variant-numeric: tabular-nums;
+    font-weight: 550;
+  }
+
+  .suffix {
+    flex: none;
+    margin-left: calc(var(--space-2) * -1);
+    padding-right: var(--space-2);
+    font-size: 0.9em;
+    color: var(--text-subtle);
+    pointer-events: none;
+  }
+
+  .steppers {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    align-self: stretch;
+    width: 22px;
+    border-left: 1px solid var(--border-faint);
+  }
+
+  .stepper {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: var(--text-subtle);
+    transition:
+      background-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
+  }
+
+  .stepper + .stepper {
+    border-top: 1px solid var(--border-faint);
+  }
+
+  .stepper > svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .stepper:hover:not(:disabled) {
+    background: var(--surface-hover);
+    color: var(--glow-aqua);
+  }
+
+  .stepper:active:not(:disabled) {
+    background: var(--surface-active);
+  }
+
+  .stepper:disabled {
+    opacity: 0.3;
+  }
+}

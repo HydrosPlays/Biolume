@@ -1,0 +1,435 @@
+/* Log view — phase log, session history, trophies, export / import. Dense, tabular, quiet. */
+
+.view {
+  container: log / inline-size;
+}
+
+.stack {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.filter {
+  width: 280px;
+  max-width: 100%;
+}
+
+.tally {
+  margin-left: auto;
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Tables ───────────────────────────────────────────────── */
+
+.tableScroll {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+}
+
+.table {
+  width: 100%;
+  /* Fixed layout: the table always fits its panel and cells truncate instead of pushing it wide. */
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+/* Column widths live on the header cells; the one column without a width takes the rest. */
+.colPhase {
+  width: 84px;
+}
+
+.colHunt {
+  width: 184px;
+}
+
+.colSpecies {
+  width: 154px;
+}
+
+.colCount {
+  width: 104px;
+}
+
+.colTotal {
+  width: 78px;
+}
+
+.colWhen {
+  width: 112px;
+}
+
+.colActions {
+  width: 88px;
+}
+
+@container log (min-width: 1100px) {
+  .colHunt {
+    width: 260px;
+  }
+}
+
+/* Narrow window: notes and the running total give way, the hunt name takes what is left. */
+@container log (max-width: 820px) {
+  .colHunt {
+    width: auto;
+  }
+
+  .colSpecies {
+    width: 142px;
+  }
+
+  .colPhase {
+    width: 80px;
+  }
+
+  .colWhen {
+    width: 108px;
+  }
+
+  .colActions {
+    width: 84px;
+  }
+
+  .table .optional {
+    display: none;
+  }
+}
+
+.table th {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: var(--space-2) var(--space-3);
+  border-top: 1px solid var(--border-faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.table th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table tbody tr:first-child td {
+  border-top: 0;
+}
+
+.table tbody tr {
+  transition: background-color var(--duration-fast) ease;
+}
+
+.table tbody tr:hover,
+.table tbody tr:focus-within {
+  background: var(--surface-hover);
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: var(--space-5);
+}
+
+.table th:last-child,
+.table td:last-child {
+  padding-right: var(--space-4);
+}
+
+.table .num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.table th.num {
+  font-family: var(--font-display);
+}
+
+.table tfoot td {
+  border-top: 1px solid var(--border-strong);
+  background: var(--surface-sunken);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.phaseNo {
+  font-family: var(--font-mono);
+  color: color-mix(in srgb, var(--accent-3) 62%, var(--ink-50));
+  white-space: nowrap;
+}
+
+.species {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.speciesName {
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 600;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.speciesName[data-unidentified] {
+  font-style: italic;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--accent-3) 62%, var(--ink-50));
+}
+
+.cellMain,
+.cellSub,
+.notes {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cellMain {
+  font-weight: 550;
+  color: var(--text-strong);
+}
+
+.cellSub {
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+}
+
+/* Rows are two lines tall already, so a note may use both before it is cut. */
+.notes {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  font-size: var(--text-xs);
+  line-height: 1.35;
+  color: var(--text-muted);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.when {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.whenDate {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rowActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+}
+
+.more {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-3);
+  border-top: 1px solid var(--border-faint);
+}
+
+/* ── Trophies ─────────────────────────────────────────────── */
+
+.trophies {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+  gap: var(--space-4);
+}
+
+.trophy {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.trophyHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.trophyTitles {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.trophyName {
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trophyDate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  font-size: var(--text-xs);
+  line-height: 1.35;
+  color: var(--text-subtle);
+}
+
+.trophyStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.trophyStat {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.trophyStat dt {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.trophyStat dd {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trophyActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* ── Data ─────────────────────────────────────────────────── */
+
+.dataGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+@container log (min-width: 860px) {
+  .dataGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dataWide {
+    grid-column: 1 / -1;
+  }
+}
+
+.dataBody {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.dataHint {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.dataActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.result {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--tone-soft);
+  border: 1px solid var(--tone-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+}
+
+.resultTitle {
+  font-weight: 600;
+  color: var(--tone-text);
+}
+
+.resultPath,
+.path {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  word-break: break-all;
+  user-select: text;
+}
+
+.resultCounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.errorList {
+  margin: 0;
+  padding-left: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  user-select: text;
+}
+
+.pathRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.path {
+  flex: 1;
+  min-width: 200px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-sm);
+}

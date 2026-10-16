@@ -1,0 +1,190 @@
+{
+  "id": 37,
+  "name": "vulpix",
+  "order": 39,
+  "gender_rate": 6,
+  "capture_rate": 190,
+  "base_happiness": 70,
+  "is_baby": false,
+  "is_legendary": false,
+  "is_mythical": false,
+  "hatch_counter": 20,
+  "has_gender_differences": false,
+  "forms_switchable": false,
+  "growth_rate": {
+    "name": "medium",
+    "url": "https://pokeapi.co/api/v2/growth-rate/2/"
+  },
+  "pokedex_numbers": [
+    {
+      "entry_number": 37,
+      "pokedex": {
+        "name": "national",
+        "url": "https://pokeapi.co/api/v2/pokedex/1/"
+      }
+    },
+    {
+      "entry_number": 37,
+      "pokedex": {
+        "name": "kanto",
+        "url": "https://pokeapi.co/api/v2/pokedex/2/"
+      }
+    }
+  ],
+  "egg_groups": [
+    {
+      "name": "ground",
+      "url": "https://pokeapi.co/api/v2/egg-group/5/"
+    }
+  ],
+  "color": {
+    "name": "brown",
+    "url": "https://pokeapi.co/api/v2/pokemon-color/3/"
+  },
+  "shape": {
+    "name": "quadruped",
+    "url": "https://pokeapi.co/api/v2/pokemon-shape/8/"
+  },
+  "evolves_from_species": null,
+  "evolution_chain": {
+    "url": "https://pokeapi.co/api/v2/evolution-chain/15/"
+  },
+  "habitat": {
+    "name": "grassland",
+    "url": "https://pokeapi.co/api/v2/pokemon-habitat/3/"
+  },
+  "generation": {
+    "name": "generation-i",
+    "url": "https://pokeapi.co/api/v2/generation/1/"
+  },
+  "names": [
+    {
+      "name": "ロコン",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      }
+    },
+    {
+      "name": "Vulpix",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    },
+    {
+      "name": "Goupix",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      }
+    }
+  ],
+  "pal_park_encounters": [
+    {
+      "base_score": 70,
+      "rate": 20,
+      "area": {
+        "name": "field",
+        "url": "https://pokeapi.co/api/v2/pal-park-area/2/"
+      }
+    }
+  ],
+  "form_descriptions": [],
+  "flavor_text_entries": [
+    {
+      "flavor_text": "At the time of\nbirth, it has\njust one tail.\fThe tail splits\nfrom its tip as\nit grows older.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "red",
+        "url": "https://pokeapi.co/api/v2/version/1/"
+      }
+    },
+    {
+      "flavor_text": "Il envoie des boules de feu. Avec\nl’âge, ses six queues en forment de\nnouvelles.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "black",
+        "url": "https://pokeapi.co/api/v2/version/17/"
+      }
+    },
+    {
+      "flavor_text": "As each tail grows, its fur becomes more lustrous.\nWhen held, it feels slightly warm.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "shield",
+        "url": "https://pokeapi.co/api/v2/version/34/"
+      }
+    },
+    {
+      "flavor_text": "In its belly burns a fire, which Vulpix spits out in the form of\nfireballs. When young, this Pokémon has but one white tail.\nAs the Pokémon matures, this single tail splits into six.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "legends-arceus",
+        "url": "https://pokeapi.co/api/v2/version/39/"
+      }
+    },
+    {
+      "flavor_text": "６本の　しっぽは　育つごとに\n毛並みが　良くなり　美しくなる。\n抱きしめると　ほんのり　温かい。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "shield",
+        "url": "https://pokeapi.co/api/v2/version/34/"
+      }
+    }
+  ],
+  "genera": [
+    {
+      "genus": "きつねポケモン",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      }
+    },
+    {
+      "genus": "Fox Pokémon",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    },
+    {
+      "genus": "Pokémon Renard",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      }
+    }
+  ],
+  "varieties": [
+    {
+      "is_default": true,
+      "pokemon": {
+        "name": "vulpix",
+        "url": "https://pokeapi.co/api/v2/pokemon/37/"
+      }
+    },
+    {
+      "is_default": false,
+      "pokemon": {
+        "name": "vulpix-alola",
+        "url": "https://pokeapi.co/api/v2/pokemon/10103/"
+      }
+    }
+  ]
+}

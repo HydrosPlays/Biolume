@@ -1,0 +1,96 @@
+@layer kit {
+  .list {
+    display: flex;
+    gap: var(--space-1);
+    min-width: 0;
+    border-bottom: 1px solid var(--border-faint);
+  }
+
+  .tab {
+    position: relative;
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: var(--space-2);
+    height: 38px;
+    padding: 0 var(--space-3);
+    background: none;
+    border: 0;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    font-weight: 550;
+    white-space: nowrap;
+    transition:
+      color var(--duration-fast) ease,
+      background-color var(--duration-fast) ease;
+  }
+
+  /* The indicator: a line of light that fades and widens in under the selected tab. */
+  .tab::after {
+    content: '';
+    position: absolute;
+    left: var(--space-2);
+    right: var(--space-2);
+    bottom: -1px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px 2px 0 0;
+    box-shadow: 0 0 10px rgb(46 232 255 / 0.7);
+    opacity: 0;
+    transform: scaleX(0.3);
+    transition:
+      opacity var(--duration-base) ease,
+      transform var(--duration-base) var(--ease-out);
+  }
+
+  .tab:hover:not(:disabled) {
+    background: var(--surface-hover);
+    color: var(--text-strong);
+  }
+
+  .tab[aria-selected='true'] {
+    color: var(--glow-aqua);
+  }
+
+  .tab[aria-selected='true']::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .tab:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .tab:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .icon {
+    display: inline-flex;
+    flex: none;
+  }
+
+  .icon > svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    color: var(--text-subtle);
+  }
+
+  .panel {
+    min-width: 0;
+  }
+
+  .panel:focus-visible {
+    outline: none;
+  }
+}
