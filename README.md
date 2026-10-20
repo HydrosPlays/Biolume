@@ -8,22 +8,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/HydrosPlays/Biolume/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/HydrosPlays/Biolume?style=for-the-badge&label=release&labelColor=0a1b30&color=2ee8ff"></a>
-  <a href="https://github.com/HydrosPlays/Biolume/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/HydrosPlays/Biolume/total?style=for-the-badge&labelColor=0a1b30&color=1df2c2"></a>
-  <img alt="Windows 10 and 11" src="https://img.shields.io/badge/Windows-10%20%7C%2011-2ee8ff?style=for-the-badge&labelColor=0a1b30">
-</p>
-
-<p align="center">
+  <img src="https://img.shields.io/badge/License-GPLv3-green?style=flat" alt="License: GPLv3">
   <a href="#elgato-stream-deck"><img alt="Stream Deck plugin included" src="https://img.shields.io/badge/Stream%20Deck-plugin%20included-9a6bff?style=flat-square&logo=elgato&logoColor=white&labelColor=0a1b30"></a>
-  <img alt="17 games, 67 hunting methods" src="https://img.shields.io/badge/odds-17%20games%20%C2%B7%2067%20methods-1df2c2?style=flat-square&labelColor=0a1b30">
-  <img alt="Electron 44" src="https://img.shields.io/badge/Electron-44-2ee8ff?style=flat-square&logo=electron&logoColor=white&labelColor=0a1b30">
-  <img alt="React 19" src="https://img.shields.io/badge/React-19-2ee8ff?style=flat-square&logo=react&logoColor=white&labelColor=0a1b30">
-  <img alt="TypeScript 6" src="https://img.shields.io/badge/TypeScript-6-2ee8ff?style=flat-square&logo=typescript&logoColor=white&labelColor=0a1b30">
-  <img alt="Vite 7" src="https://img.shields.io/badge/Vite-7-2ee8ff?style=flat-square&logo=vite&logoColor=white&labelColor=0a1b30">
-</p>
-
-<p align="center">
-  <a href="https://github.com/HydrosPlays/Biolume/releases/latest"><img alt="Download for Windows" src="https://img.shields.io/badge/%E2%AC%87%20Download-for%20Windows-2ee8ff?style=for-the-badge&labelColor=0a1b30"></a>
+  <img src="https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-blue?style=flat" alt="Platform: Windows 10 | 11">
+  <img src="https://img.shields.io/github/v/release/HydrosPlays/Biolume?include_prereleases&style=flat&label=Version&color=maroon" alt="Latest version">
+  <a href="https://github.com/HydrosPlays/Biolume/releases"><img src="https://img.shields.io/github/downloads/HydrosPlays/Biolume/total?style=flat&label=Downloads&color=7B68EE" alt="Total downloads"></a>
 </p>
 
 <p align="center">
